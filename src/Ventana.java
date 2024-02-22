@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,9 +9,14 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 
@@ -33,8 +37,9 @@ public class Ventana extends JFrame {
 		this.setLocation(200,200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Mi ventana");
-		this.setMinimumSize(new Dimension(250,500));
-		this.setMinimumSize(new Dimension(750,750));
+		this.setMinimumSize(new Dimension(250,700));
+		//este es el que usa
+		this.setMinimumSize(new Dimension(750,900));
 
 
 
@@ -43,16 +48,142 @@ public class Ventana extends JFrame {
 		this.setLayout(null);
 		this.setVisible(true);
 		this.setResizable(true);
-	} 
-	public void IniciarComponentes() {
-		this.login();
+	}
 
+	public void IniciarComponentes() {
+		this.admin();
+		//this.login();
+		//this.registro();
+
+
+		this.repaint();
+		this.revalidate();
+
+	}
+	
+	
+	public void admin() {
+
+		//panel admin
+		JPanel adminPanel = new JPanel();
+		adminPanel.setSize(this.getWidth(), this.getHeight());
+		adminPanel.setLocation(0, 0);
+		adminPanel.setBackground(Color.CYAN);
+		adminPanel.setLayout(null);
+		
+		//barra
+		JMenuBar barra = new JMenuBar(); 
+		JMenu menuFile = new JMenu("Archivo");
+		JMenuItem openItem = new JMenuItem("Abrir archivo...");
+		JMenuItem createItem = new JMenuItem("Crear archivo...");
+		
+		barra.add(menuFile);
+		menuFile.add(openItem);
+		menuFile.add(createItem);
+		
+		
+		this.setJMenuBar(barra);
+		
+		
+		//contenido de panel
+		JLabel userLabel = new JLabel("Usuarios",0);
+		userLabel.setSize(300, 80);
+		userLabel.setFont(new Font("Arial",Font.BOLD,24));
+		userLabel.setForeground(Color.white);
+		userLabel.setLocation(400, 10);
+		userLabel.setBackground(Color.black);
+		userLabel.setOpaque(true);
+		adminPanel.add(userLabel);
+		
+		
+		JLabel widgetTitle = new JLabel("Total de usuarios",0);
+		widgetTitle.setBounds(40, 120, 300, 80);
+		widgetTitle.setFont(new Font("Arial",Font.BOLD,18));
+		widgetTitle.setOpaque(true);
+		widgetTitle.setBackground(Color.black);
+		widgetTitle.setForeground(Color.white);
+		adminPanel.add(widgetTitle);
+		
+		
+		
+		JLabel widgetContent = new JLabel("100",0);
+		widgetContent.setBounds(40, 175, 300, 80);
+		widgetContent.setFont(new Font("Arial",Font.BOLD,22));
+		widgetContent.setOpaque(true);
+		widgetContent.setBackground(Color.black);
+		widgetContent.setForeground(Color.white);
+		adminPanel.add(widgetContent);
+		
+		JLabel widget = new JLabel("");
+		widget.setBounds(40, 180, 300, 80);
+		widget.setOpaque(true);
+		widget.setBackground(Color.black);
+		adminPanel.add(widget);
+		
+		JButton download = new JButton ("Exportar") ;
+		download.setBounds(730, 300, 100, 40);
+		download.setOpaque(true);
+		adminPanel.add(download);
+		
+		JButton add = new JButton ("Añadir") ;
+		add.setBounds(850, 300, 100, 40);
+		add.setOpaque(true);
+		adminPanel.add(add);
+		
+		
+				
+				
+	
+		String tittle[]= {"No. Control","Nombre","ApelliSdo","semestre"};
+		
+		String tableData [][] = {
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"},
+				{"No. Control","Nombre","ApelliSdo","semestre"}
+						
+				
+		};
+		
+		JTable tableUser = new JTable(tableData,tittle);
+		//tableUser.setBounds(100, 450, 500, 200);
+		JScrollPane tableScroll = new JScrollPane(tableUser);
+		tableScroll.setBounds(50, 350, 900, 200);
+		
+		adminPanel.add(tableScroll);
+		
+		
+		
+		
+		
+		this.add(adminPanel);
+		
+		
+	}
+	
+
+
+
+
+	public void registro(){
 		JPanel registro = new JPanel();
 		registro.setSize(this.getWidth()/2, this.getHeight());
 		registro.setLocation(500, 0);
 		registro.setBackground(Color.decode("#FFCCEE"));
 		registro.setLayout(null);
-		
+
 		JLabel regisLabel = new JLabel("Registro",0);
 		regisLabel.setSize(300, 80);
 		regisLabel.setFont(new Font("Arial",Font.BOLD,24));
@@ -61,104 +192,99 @@ public class Ventana extends JFrame {
 		regisLabel.setBackground(Color.orange);
 		regisLabel.setOpaque(true);
 		registro.add(regisLabel);
-		
+
 		JLabel labelUser = new JLabel("Nombre de usuario:");
 		labelUser.setBounds(150,120,200,40);
 		labelUser.setFont(new Font ("Arial", Font.BOLD, 20));
 		registro.add(labelUser);
-	
+
 		JTextField fieldUser = new JTextField();
 		fieldUser.setBounds(60,150,370,35);
 		fieldUser.setHorizontalAlignment(0);
 		fieldUser.setOpaque(true);
 		fieldUser.setBackground(Color.white);
-		registro.add(fieldUser);	
-		
-		JLabel bioLabel = new JLabel("Biografia",0);
+		registro.add(fieldUser);
+
+		JLabel bioLabel = new JLabel("Bio",0);
 		bioLabel.setBounds(150,210,200,40);
 		bioLabel.setFont(new Font("Arial",Font.BOLD,24));
-		bioLabel.setForeground(Color.black);
-		
-		bioLabel.setBackground(Color.decode("#FFCCEE"));
-		bioLabel.setOpaque(true);
 		registro.add(bioLabel);
-		
-		
+
+
 		JTextArea textBio = new JTextArea();
-		textBio.setBounds(150,250,200,100);
+		textBio.setBounds(80,250,330,100);
 		registro.add(textBio);
-		
-			
-		
+
+
+
 		JLabel askLabel = new JLabel("Preferencias",0);
-		askLabel.setBounds(150,400,200,40);
+		askLabel.setBounds(155,400,200,40);
 		askLabel.setFont(new Font("Arial",Font.BOLD,15));
-		askLabel.setForeground(Color.black);
-		
-		askLabel.setBackground(Color.decode("#FFCCEE"));
+		askLabel.setBackground(Color.ORANGE);
 		askLabel.setOpaque(true);
 		registro.add(askLabel);
-		
-		
-		JCheckBox opBox1 = new JCheckBox("Dulces")	;
-		opBox1.setBounds(120,450,100,70);
-		opBox1.setFont(new Font("Arial",Font.BOLD,10));
-		opBox1.setBackground(Color.decode("#FFCCEE"));
-		registro.add(opBox1);
-		
 
-		JCheckBox opBox2 = new JCheckBox("Salado")	;
-		opBox2.setBounds(200,450,100,70);
-		opBox2.setFont(new Font("Arial",Font.BOLD,10));
+
+		JCheckBox opBox1 = new JCheckBox("Dulces") ;
+		opBox1.setBounds(130,450,100,70);
+		opBox1.setFont(new Font("Arial",Font.BOLD,15));
+		opBox1.setBackground(Color.decode("#FFCCEE"));
+
+		registro.add(opBox1);
+
+
+		JCheckBox opBox2 = new JCheckBox("Salado") ;
+		opBox2.setBounds(210,450,100,70);
+		opBox2.setFont(new Font("Arial",Font.BOLD,15));
 		opBox2.setBackground(Color.decode("#FFCCEE"));
 		registro.add(opBox2);
-		
 
-		JCheckBox opBox3 = new JCheckBox("Agrio")	;
-		opBox3.setBounds(280,450,100,70);
-		opBox3.setFont(new Font("Arial",Font.BOLD,10));
+
+		JCheckBox opBox3 = new JCheckBox("Saludable") ;
+		opBox3.setBounds(290,450,100,70);
+		opBox3.setFont(new Font("Arial",Font.BOLD,15));
 		opBox3.setBackground(Color.decode("#FFCCEE"));
 		registro.add(opBox3);
-		
-		JLabel askLabel2 = new JLabel("Wings",0);
-		askLabel2.setBounds(150,530,200,40);
+
+		JLabel askLabel2 = new JLabel("Términos",0);
+		askLabel2.setBounds(100,530,300,40);
 		askLabel2.setFont(new Font("Arial",Font.BOLD,15));
 		askLabel2.setForeground(Color.black);
-		
-		askLabel2.setBackground(Color.decode("#FFCCEE"));
+		askLabel2.setBackground(Color.orange);
 		askLabel2.setOpaque(true);
 		registro.add(askLabel2);
-		
-		JRadioButton rbtn1=new JRadioButton("txt1",false);
-		rbtn1.setBounds(160,580,100,40);
+
+		JRadioButton rbtn1=new JRadioButton("Acepto lo términos",false);
+		rbtn1.setBounds(85,580,180,40);
 		rbtn1.setBackground(Color.decode("#FFCCEE"));
 		rbtn1.setOpaque(true);
 		registro.add(rbtn1);
-	
-		JRadioButton rbtn2=new JRadioButton("txt2",false);
-		rbtn2.setBounds(240,580,100,40);
+
+		JRadioButton rbtn2=new JRadioButton("No acepto los términos",false);
+		rbtn2.setBounds(260,580,190,40);
 		rbtn2.setBackground(Color.decode("#FFCCEE"));
 		rbtn2.setOpaque(true);
 		registro.add(rbtn2);
-		
-		String locaciones[]= {"centro","camino real","8"};
-		
-		JComboBox combo1=new JComboBox(locaciones);
-		combo1.setBounds(240,650,100,40);
-		 registro.add(combo1);
-	
-		registro.setVisible(true);
-		this.add(registro);
-		this.repaint();
-		this.revalidate();
-		
-		
 
+		String locaciones[]= {"Centro","Camino real","8 de octubre"};
+
+		JComboBox combo1=new JComboBox(locaciones);
+		combo1.setBounds(90,650,300,40);
+		registro.add(combo1);
+
+		JButton btnAcceder = new JButton("Crear cuenta");
+		btnAcceder.setBounds(172,700,170,50);
+		btnAcceder.setFont(new Font ("Arial", Font.BOLD, 20));
+
+		registro.add(btnAcceder);
+
+
+
+		this.add(registro);
 	}
-	
-	
-	
-	
+
+
+
 	public void login() {
 		JPanel login = new JPanel();
 		login.setSize(this.getWidth()/2, this.getHeight());
@@ -217,13 +343,13 @@ public class Ventana extends JFrame {
 
 		login.add(btnLogin);
 
-		
 
 
-		
+
+
 		this.add(login);
 
-		
+
 	}
 
 

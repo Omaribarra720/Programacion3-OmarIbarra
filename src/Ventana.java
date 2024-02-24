@@ -3,7 +3,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextArea;
-
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -18,6 +18,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 
 //OmarIbarra
@@ -32,16 +34,17 @@ public class Ventana extends JFrame {
 	public Ventana(){
 
 		this.setTitle("Asd");
-
-		this.setSize(1000, 300);
+		
+		//calculadora
+		
 		this.setLocation(200,200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Mi ventana");
-		this.setMinimumSize(new Dimension(250,700));
+	
 		//este es el que usa
-		this.setMinimumSize(new Dimension(750,900));
-
-
+		//this.setMinimumSize(new Dimension(1000,900));
+		//calculadora
+		this.setMinimumSize(new Dimension(590,740));
 
 		this.setLocationRelativeTo(null);
 		this.IniciarComponentes();
@@ -51,14 +54,160 @@ public class Ventana extends JFrame {
 	}
 
 	public void IniciarComponentes() {
-		this.admin();
+		//this.admin();
 		//this.login();
 		//this.registro();
+		this.calculadora();
 
 
 		this.repaint();
 		this.revalidate();
 
+	}
+	
+	
+	public void boton(JButton button) {
+        button.setFont(new Font("Arial", Font.BOLD, 24));
+        button.setBackground(Color.gray);
+        button.setFocusable(false);
+        button.setBorderPainted(false);
+    }
+	public void calculadora() {
+		JPanel calculadoraPanel = new JPanel();
+		calculadoraPanel.setSize(this.getWidth(), this.getHeight());
+		calculadoraPanel.setLocation(0, 0);
+		calculadoraPanel.setBackground(Color.black);
+		calculadoraPanel.setLayout(null);
+		
+		//contenido panel
+		JLabel numbersLabel = new JLabel("180.0",0);
+		numbersLabel.setBounds(15, 20, 545, 60);
+		numbersLabel.setFont(new Font("Arial",Font.BOLD,24));
+		numbersLabel.setForeground(Color.black);
+		numbersLabel.setBackground(Color.white);
+		numbersLabel.setOpaque(true);
+		calculadoraPanel.add(numbersLabel);
+		
+		//primera columna
+		JButton btnCE = new JButton("CE");
+		boton(btnCE);
+		btnCE.setBounds(15,100,125,100);
+		calculadoraPanel.add(btnCE);
+		
+		JButton btn7 = new JButton("7");
+		boton(btn7);
+		btn7.setBounds(15,220,125,100);
+		calculadoraPanel.add(btn7);
+		
+		JButton btn4 = new JButton("4");
+		boton(btn4);
+		btn4.setBounds(15,340,125,100);
+		calculadoraPanel.add(btn4);
+		
+		JButton btn1 = new JButton("1");
+		boton(btn1);
+		btn1.setBounds(15,460,125,100);
+		calculadoraPanel.add(btn1);
+		
+		JButton btn0 = new JButton("0");
+		boton(btn0);
+		btn0.setBounds(15,580,125,100);
+		calculadoraPanel.add(btn0);
+		
+		//segunda columna
+		JButton btnEmpty1 = new JButton("");
+		boton(btnEmpty1);
+		btnEmpty1.setBounds(155,100,125,100);
+		calculadoraPanel.add(btnEmpty1);
+		
+		JButton btn8 = new JButton("8");
+		boton(btn8);
+		btn8.setBounds(155,220,125,100);
+		calculadoraPanel.add(btn8);
+		
+		JButton btn5 = new JButton("5");
+		boton(btn5);
+		btn5.setBounds(155,340,125,100);
+		calculadoraPanel.add(btn5);
+		
+		JButton btn2 = new JButton("2");
+		boton(btn2);
+		btn2.setBounds(155,460,125,100);
+		calculadoraPanel.add(btn2);
+		
+		JButton btnPunto = new JButton(".");
+		boton(btnPunto);
+		btnPunto.setBounds(155,580,125,100);
+		calculadoraPanel.add(btnPunto);
+		
+		//tercera columna
+		
+		JButton btnEmpty2 = new JButton("");
+		boton(btnEmpty2);
+		btnEmpty2.setBounds(295,100,125,100);
+		calculadoraPanel.add(btnEmpty2);
+	
+		JButton btn9 = new JButton("9");
+		boton(btn9);
+		btn9.setBounds(295,220,125,100);
+		calculadoraPanel.add(btn9);
+		
+		JButton btn6 = new JButton("6");
+		boton(btn6);
+		btn6.setBounds(295,340,125,100);
+		calculadoraPanel.add(btn6);
+		
+		JButton btn3 = new JButton("3");
+		boton(btn3);
+		btn3.setBounds(295,460,125,100);
+		calculadoraPanel.add(btn3);
+		
+		JButton btnIgual = new JButton("=");
+		boton(btnIgual);
+		btnIgual.setBounds(295,580,125,100);
+		btnIgual.setBackground(Color.orange);
+		calculadoraPanel.add(btnIgual);
+		
+		//cuarta columna
+		JButton btnEmpty3 = new JButton("");
+		boton(btnEmpty3);
+		btnEmpty3.setBounds(435,100,125,100);
+		
+		calculadoraPanel.add(btnEmpty3);
+		
+		JButton btnDiv = new JButton("/");
+		boton(btnDiv);
+		btnDiv.setBounds(435,220,125,100);
+		btnDiv.setBackground(Color.orange);
+		calculadoraPanel.add(btnDiv);
+		
+		JButton btnX = new JButton("*");
+		boton(btnX);
+		btnX.setBounds(435,340,125,100);
+		btnX.setBackground(Color.orange);
+		calculadoraPanel.add(btnX);
+		
+		JButton btnMinus = new JButton("-");
+		boton(btnMinus);
+		btnMinus.setBounds(435,460,125,100);
+		btnMinus.setBackground(Color.orange);
+		calculadoraPanel.add(btnMinus);
+		
+		JButton btnPlus = new JButton("-");
+		boton(btnPlus);
+		btnPlus.setBounds(435,580,125,100);
+		btnPlus.setBackground(Color.orange);
+		calculadoraPanel.add(btnPlus);
+		
+		
+		
+	
+		
+		
+		
+		
+		this.add(calculadoraPanel);		
+		
 	}
 	
 	

@@ -3,7 +3,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextArea;
-import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -18,8 +18,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 
 //OmarIbarra
@@ -34,17 +32,16 @@ public class Ventana extends JFrame {
 	public Ventana(){
 
 		this.setTitle("Asd");
-		
-		//calculadora
-		
+
+		this.setSize(1000, 300);
 		this.setLocation(200,200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Mi ventana");
-	
+		this.setMinimumSize(new Dimension(250,700));
 		//este es el que usa
-		//this.setMinimumSize(new Dimension(1000,900));
-		//calculadora
-		this.setMinimumSize(new Dimension(590,740));
+		this.setMinimumSize(new Dimension(750,900));
+
+
 
 		this.setLocationRelativeTo(null);
 		this.IniciarComponentes();
@@ -55,159 +52,13 @@ public class Ventana extends JFrame {
 
 	public void IniciarComponentes() {
 		//this.admin();
-		//this.login();
+		this.login();
 		//this.registro();
-		this.calculadora();
 
 
 		this.repaint();
 		this.revalidate();
 
-	}
-	
-	
-	public void boton(JButton button) {
-        button.setFont(new Font("Arial", Font.BOLD, 24));
-        button.setBackground(Color.gray);
-        button.setFocusable(false);
-        button.setBorderPainted(false);
-    }
-	public void calculadora() {
-		JPanel calculadoraPanel = new JPanel();
-		calculadoraPanel.setSize(this.getWidth(), this.getHeight());
-		calculadoraPanel.setLocation(0, 0);
-		calculadoraPanel.setBackground(Color.black);
-		calculadoraPanel.setLayout(null);
-		
-		//contenido panel
-		JLabel numbersLabel = new JLabel("180.0",0);
-		numbersLabel.setBounds(15, 20, 545, 60);
-		numbersLabel.setFont(new Font("Arial",Font.BOLD,24));
-		numbersLabel.setForeground(Color.black);
-		numbersLabel.setBackground(Color.white);
-		numbersLabel.setOpaque(true);
-		calculadoraPanel.add(numbersLabel);
-		
-		//primera columna
-		JButton btnCE = new JButton("CE");
-		boton(btnCE);
-		btnCE.setBounds(15,100,125,100);
-		calculadoraPanel.add(btnCE);
-		
-		JButton btn7 = new JButton("7");
-		boton(btn7);
-		btn7.setBounds(15,220,125,100);
-		calculadoraPanel.add(btn7);
-		
-		JButton btn4 = new JButton("4");
-		boton(btn4);
-		btn4.setBounds(15,340,125,100);
-		calculadoraPanel.add(btn4);
-		
-		JButton btn1 = new JButton("1");
-		boton(btn1);
-		btn1.setBounds(15,460,125,100);
-		calculadoraPanel.add(btn1);
-		
-		JButton btn0 = new JButton("0");
-		boton(btn0);
-		btn0.setBounds(15,580,125,100);
-		calculadoraPanel.add(btn0);
-		
-		//segunda columna
-		JButton btnEmpty1 = new JButton("");
-		boton(btnEmpty1);
-		btnEmpty1.setBounds(155,100,125,100);
-		calculadoraPanel.add(btnEmpty1);
-		
-		JButton btn8 = new JButton("8");
-		boton(btn8);
-		btn8.setBounds(155,220,125,100);
-		calculadoraPanel.add(btn8);
-		
-		JButton btn5 = new JButton("5");
-		boton(btn5);
-		btn5.setBounds(155,340,125,100);
-		calculadoraPanel.add(btn5);
-		
-		JButton btn2 = new JButton("2");
-		boton(btn2);
-		btn2.setBounds(155,460,125,100);
-		calculadoraPanel.add(btn2);
-		
-		JButton btnPunto = new JButton(".");
-		boton(btnPunto);
-		btnPunto.setBounds(155,580,125,100);
-		calculadoraPanel.add(btnPunto);
-		
-		//tercera columna
-		
-		JButton btnEmpty2 = new JButton("");
-		boton(btnEmpty2);
-		btnEmpty2.setBounds(295,100,125,100);
-		calculadoraPanel.add(btnEmpty2);
-	
-		JButton btn9 = new JButton("9");
-		boton(btn9);
-		btn9.setBounds(295,220,125,100);
-		calculadoraPanel.add(btn9);
-		
-		JButton btn6 = new JButton("6");
-		boton(btn6);
-		btn6.setBounds(295,340,125,100);
-		calculadoraPanel.add(btn6);
-		
-		JButton btn3 = new JButton("3");
-		boton(btn3);
-		btn3.setBounds(295,460,125,100);
-		calculadoraPanel.add(btn3);
-		
-		JButton btnIgual = new JButton("=");
-		boton(btnIgual);
-		btnIgual.setBounds(295,580,125,100);
-		btnIgual.setBackground(Color.orange);
-		calculadoraPanel.add(btnIgual);
-		
-		//cuarta columna
-		JButton btnEmpty3 = new JButton("");
-		boton(btnEmpty3);
-		btnEmpty3.setBounds(435,100,125,100);
-		
-		calculadoraPanel.add(btnEmpty3);
-		
-		JButton btnDiv = new JButton("/");
-		boton(btnDiv);
-		btnDiv.setBounds(435,220,125,100);
-		btnDiv.setBackground(Color.orange);
-		calculadoraPanel.add(btnDiv);
-		
-		JButton btnX = new JButton("*");
-		boton(btnX);
-		btnX.setBounds(435,340,125,100);
-		btnX.setBackground(Color.orange);
-		calculadoraPanel.add(btnX);
-		
-		JButton btnMinus = new JButton("-");
-		boton(btnMinus);
-		btnMinus.setBounds(435,460,125,100);
-		btnMinus.setBackground(Color.orange);
-		calculadoraPanel.add(btnMinus);
-		
-		JButton btnPlus = new JButton("-");
-		boton(btnPlus);
-		btnPlus.setBounds(435,580,125,100);
-		btnPlus.setBackground(Color.orange);
-		calculadoraPanel.add(btnPlus);
-		
-		
-		
-	
-		
-		
-		
-		
-		this.add(calculadoraPanel);		
-		
 	}
 	
 	
@@ -309,7 +160,7 @@ public class Ventana extends JFrame {
 		JTable tableUser = new JTable(tableData,tittle);
 		//tableUser.setBounds(100, 450, 500, 200);
 		JScrollPane tableScroll = new JScrollPane(tableUser);
-		tableScroll.setBounds(50, 350, 900, 200);
+		tableScroll.setBounds(50, 350, 900, 300);
 		
 		adminPanel.add(tableScroll);
 		
@@ -437,33 +288,93 @@ public class Ventana extends JFrame {
 	public void login() {
 		JPanel login = new JPanel();
 		login.setSize(this.getWidth()/2, this.getHeight());
-		login.setBackground(Color.PINK);
+		login.setBackground(Color.decode("#3C61A9"));
 		login.setLayout(null);
 
-		JLabel titulo = new JLabel("Acceder",0);
+		JLabel titulo = new JLabel("User login",0);
 		titulo.setSize(300, 80);
-
 		titulo.setFont(new Font("Arial",Font.BOLD,24));
 		titulo.setForeground(Color.white);
 		titulo.setLocation(100, 10);
-		titulo.setBackground(Color.GREEN);
+		titulo.setBackground(Color.decode("#3C61A9"));
 		titulo.setOpaque(true);
 		login.add(titulo);
 
 
-		JLabel labelUser = new JLabel("Nombre de usuario:");
-		labelUser.setBounds(60,120,200,40);
-		labelUser.setFont(new Font ("Arial", Font.BOLD, 20));
-		login.add(labelUser);
+	
+		JLabel labelAccount = new JLabel("My Account:");
+		labelAccount.setForeground(Color.decode("#DCCA8A"));
+		labelAccount.setBounds(140,120,250,60);
+		labelAccount.setFont(new Font ("Arial", Font.BOLD, 40));
+		login.add(labelAccount);
 
 
+
+		
+		
+		JLabel labelUserName = new JLabel("Enter your username:");
+		labelUserName.setForeground(Color.white);
+		labelUserName.setBounds(120,230,250,30);
+		labelUserName.setFont(new Font ("Arial", Font.BOLD, 15));
+		login.add(labelUserName);
+		
 		JTextField fieldUser = new JTextField();
-		fieldUser.setBounds(60,150,370,35);
+		fieldUser.setBounds(120,250,290,40);
 		fieldUser.setOpaque(true);
 		fieldUser.setBackground(Color.white);
 		login.add(fieldUser);		
+		
+		JLabel logo = new JLabel();
+		logo.setIcon(new ImageIcon(getClass().getResource("usuario.png")));
+		logo.setBounds(60,170, 200, 200);
+		login.add(logo);
+		
+		JLabel labelPass = new JLabel("Enter your password:");
+		labelPass.setForeground(Color.white);
+		labelPass.setBounds(120,330,250,30);
+		labelPass.setFont(new Font ("Arial", Font.BOLD, 15));
+		login.add(labelPass);
+		
+		JPasswordField fieldPass = new JPasswordField();
+		fieldPass.setBounds(120,350,290,40);
+		fieldPass.setOpaque(true);
+		fieldPass.setBackground(Color.white);
+		login.add(fieldPass);		
+		
+		JLabel logo2 = new JLabel();
+		logo2.setIcon(new ImageIcon(getClass().getResource("cerrar.png")));
+		logo2.setBounds(60,270, 200, 200);
+		login.add(logo2);
+		
+		
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.setBounds(180,430,170,50);
+		btnLogin.setBackground(Color.decode("#DCCA8A"));
+		btnLogin.setFont(new Font ("Arial", Font.BOLD, 20));
+		login.add(btnLogin);
+		
+		JLabel labelQuestion = new JLabel("Don´t have an acount?");
+		labelQuestion .setForeground(Color.white);
+		labelQuestion .setBounds(200,540,250,30);
+		labelQuestion .setFont(new Font ("Arial", Font.BOLD, 10));
+		login.add(labelQuestion );
 
-
+		JButton btnSign = new JButton("Sign up");
+		btnSign.setBounds(190,570,130,40);
+		btnSign.setBackground(Color.decode("#DCCA8A"));
+		btnSign.setFont(new Font ("Arial", Font.BOLD, 18));
+		login.add(btnSign);
+		
+		
+		JLabel labelBack = new JLabel();
+		labelBack.setBackground(Color.decode("#253C71"));
+		labelBack.setBounds(50,90,390,430);
+		labelBack.setOpaque(true);
+		login.add(labelBack);
+		
+		
+		/*
 		JLabel labelPass = new JLabel("Contraseña:");
 		labelPass.setBounds(60,220,200,40);
 		labelPass.setFont(new Font ("Arial", Font.BOLD, 20));
@@ -491,10 +402,9 @@ public class Ventana extends JFrame {
 		btnLogin.setFont(new Font ("Arial", Font.BOLD, 20));
 
 		login.add(btnLogin);
-
-
-
-
+		*/
+	
+		
 
 		this.add(login);
 

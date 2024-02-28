@@ -1,8 +1,12 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Color;
 import javax.swing.JTextArea;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -52,13 +56,71 @@ public class Ventana extends JFrame {
 
 	public void IniciarComponentes() {
 		//this.admin();
-		this.login();
+		//this.login();
 		//this.registro();
+		this.calculadoraGrid();
 
 
 		this.repaint();
 		this.revalidate();
 
+	}
+	public void calculadoraGrid(){
+		
+		this.setSize(480, 650);
+		
+		JPanel panel = new JPanel();
+		panel.setSize(this.getWidth(), this.getHeight());
+		panel.setBackground(Color.decode("#E16D8D"));
+		panel.setLayout(new BorderLayout());
+		
+		JLabel text = new JLabel("100.00",0);
+		text.setOpaque(true);
+		text.setFont(new Font("Arial",Font.BOLD,40));
+		text.setBackground(Color.white);
+		panel.add(text,BorderLayout.NORTH);
+		
+		JPanel centro = new JPanel();
+		centro.setBackground(Color.orange);
+		centro.setLayout(new GridLayout(4,3,10,10));
+		panel.add(centro,BorderLayout.CENTER);
+		
+		String btns[]= {"7","8","9","4","5","6","1","2","3","0",".","*"};
+		for(int i =0;i<12;i++) {
+			JButton button = new JButton(btns[i]);
+			centro.add(button);
+		}
+		
+
+		
+		JPanel east = new JPanel();
+		east.setBackground(Color.orange);
+		east.setLayout(new GridLayout(3,1,10,10));
+		panel.add(east,BorderLayout.EAST);
+		
+		String btns2[]= {"+","-","="};
+		for(int i =0;i<3;i++) {
+			JButton button = new JButton(btns2[i]);
+			//button.setSize(50, 50);
+			east.add(button);
+		}	
+			
+
+		JPanel west = new JPanel();
+		west.setBackground(Color.red);
+		west.setLayout(new BoxLayout(west,BoxLayout.Y_AXIS));
+		panel.add(west,BorderLayout.WEST);
+		
+		String btns3[]= {"/","CE","C"};
+		for(int i =0;i<3;i++) {
+			JButton button = new JButton(btns3[i]);
+			//button.setSize(50, 50);
+			west.add(button);
+		}	
+		
+		this.add(panel);
+		
+		
 	}
 	
 	

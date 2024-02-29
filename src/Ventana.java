@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
 import javax.swing.JTextArea;
@@ -22,6 +23,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 
 //OmarIbarra
@@ -35,7 +40,7 @@ public class Ventana extends JFrame {
 	//Constructor que define los atributos base de la ventana
 	public Ventana(){
 
-		this.setTitle("Asd");
+		this.setTitle("Ventana");
 
 		this.setSize(1000, 300);
 		this.setLocation(200,200);
@@ -58,13 +63,179 @@ public class Ventana extends JFrame {
 		//this.admin();
 		//this.login();
 		//this.registro();
-		this.calculadoraGrid();
+		//this.calculadoraGrid();
+		this.panelLayout();
 
 
 		this.repaint();
 		this.revalidate();
 
 	}
+
+
+
+
+	public void panelLayout() {
+        this.setSize(480, 650);
+
+        JPanel panel = new JPanel();
+        panel.setSize(this.getWidth(), 550);
+        panel.setBackground(Color.decode("#99FF99"));
+        panel.setLayout(new BorderLayout());
+
+        JLabel text = new JLabel("Interés");
+        text.setOpaque(true);
+        text.setFont(new Font("Arial", Font.ITALIC, 30));
+        text.setForeground(Color.red);
+        text.setBackground(Color.white);
+        panel.add(text, BorderLayout.NORTH);
+
+        JPanel centro = new JPanel();
+        centro.setBackground(Color.decode("#99FF99"));
+        centro.setLayout(new BoxLayout(centro, BoxLayout.Y_AXIS));
+        centro.setBorder(new MatteBorder(20, 20, 40, 40, Color.white));
+
+        // Crear y agregar los tres paneles para la parte central del layout
+        JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
+        panel1.setOpaque(false);
+        panel1.setPreferredSize(new Dimension(400, 20));
+
+        JLabel labelPanel1 = new JLabel("Calcular interés");
+        labelPanel1.setFont(new Font("Arial", Font.ITALIC, 22));
+        panel1.add(labelPanel1);
+
+        centro.add(panel1);
+
+        JPanel panel2 = new JPanel();
+        panel2.setOpaque(false);
+        panel2.setPreferredSize(new Dimension(400, 280));
+        panel2.setLayout(new GridLayout(3, 2));
+
+        String labels[] = {"Capital:                               ", "Tiempo:                              ", "Tasa de interés:               "};
+
+        for (int i = 0; i < 3; i++) {
+            JPanel cellPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            cellPanel.setOpaque(false);
+
+            JLabel label = new JLabel(labels[i]);
+            label.setFont(new Font("Arial", Font.BOLD, 20));
+            cellPanel.add(label);
+
+            JTextField textField = new JTextField();
+            textField.setPreferredSize(new Dimension(200, 25));
+            cellPanel.add(textField);
+
+            panel2.add(cellPanel);
+        }
+
+        centro.add(panel2);
+
+        JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panel3.setBackground(Color.red);
+        panel3.setPreferredSize(new Dimension(400, 100));
+        panel3.setOpaque(false);
+
+        JButton button1 = new JButton("Calcular");
+        button1.setFont(new Font("Arial", Font.BOLD, 24));
+        button1.setBackground(Color.gray);
+        button1.setFocusable(false);
+        button1.setBorderPainted(false);
+
+        JButton button2 = new JButton("Cancelar");
+        button2.setFont(new Font("Arial", Font.BOLD, 24));
+        button2.setBackground(Color.gray);
+        button2.setFocusable(false);
+        button2.setBorderPainted(false);
+
+        panel3.add(button1);
+        panel3.add(button2);
+
+        centro.add(panel3);
+
+        panel.add(centro, BorderLayout.CENTER);
+
+        JPanel panelmitad = new JPanel();
+        panelmitad.setLocation(0, 550);
+        panelmitad.setSize(this.getWidth(), 300);
+        panelmitad.setBackground(Color.decode("#FF9999"));
+        panelmitad.setBorder(new MatteBorder(20, 20, 40, 40, Color.white));
+        
+        panelmitad.setLayout(new GridLayout(2, 2));
+
+        String labels2[] = {"Interés:                             ", "Monto:                              ",};
+
+        for (int i = 0; i < 2; i++) {
+            JPanel cellPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+           cellPanel.setOpaque(false);
+
+            JLabel label = new JLabel(labels2[i]);
+            label.setFont(new Font("Arial", Font.BOLD, 20));
+            cellPanel.add(label);
+
+            JTextField textField = new JTextField();
+            textField.setPreferredSize(new Dimension(200, 25));
+            textField.setEditable(false);
+            cellPanel.add(textField);
+
+            panelmitad.add(cellPanel);
+        }
+
+        //centro.add(panel2);
+
+        this.add(panelmitad);
+        this.add(panel);
+    }
+
+
+
+	/*
+	for(int i =0;i<=8;i++) {
+	if(i==7 || i==8) {
+
+	JButton button = new JButton("lol");
+	button.setBounds(10, 10, 200, 50);
+	button.setHorizontalAlignment(SwingConstants.LEFT);
+	centro.add(button);
+
+	}
+	if(i==1 || i==3 || i==5) {
+
+	JLabel label = new JLabel("juas juas");
+	centro.add(label);
+
+	}
+	if(i==2 || i==4 || i==6) {
+
+	JTextField field = new JTextField("juas juas");
+	centro.add(field);
+
+	}
+	}
+
+
+
+	JTextField fieldUser = new JTextField();
+	fieldUser.setBounds(60,150,370,35);
+	fieldUser.setOpaque(true);
+	fieldUser.setBackground(Color.white);
+	centro.add(fieldUser);
+
+	JLabel textDato1 = new JLabel("Interés",0);
+	textDato1.setOpaque(true);
+	textDato1.setFont(new Font("Arial",Font.BOLD,40));
+	textDato1.setForeground(Color.orange);
+	textDato1.setBackground(Color.white);
+	centro.add(textDato1,BorderLayout.CENTER);
+
+	JLabel textDato2 = new JLabel("Interés",0);
+	textDato2.setOpaque(false);
+	textDato2.setLocation(70, 70);
+	textDato2.setBounds(10, 40, 100,100);
+	textDato2.setFont(new Font("Arial",Font.BOLD,40));
+	textDato2.setForeground(Color.orange);
+	textDato2.setBackground(Color.white);
+	centro.add(textDato2,BorderLayout.CENTER);
+	*/
 	public void calculadoraGrid(){
 		
 		this.setSize(480, 650);

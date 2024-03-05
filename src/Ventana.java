@@ -1,12 +1,19 @@
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.Color;
 import javax.swing.JTextArea;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,10 +30,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
+import javax.swing.SwingConstants;
 
 
 //OmarIbarra
@@ -40,7 +44,7 @@ public class Ventana extends JFrame {
 	//Constructor que define los atributos base de la ventana
 	public Ventana(){
 
-		this.setTitle("Ventana");
+		this.setTitle("Asd");
 
 		this.setSize(1000, 300);
 		this.setLocation(200,200);
@@ -64,178 +68,156 @@ public class Ventana extends JFrame {
 		//this.login();
 		//this.registro();
 		//this.calculadoraGrid();
-		this.panelLayout();
-
+		//this.panelLayout();
+		//this.paint(getGraphics());
 
 		this.repaint();
 		this.revalidate();
 
 	}
+	
+	//sobrescribir con graphics
+	@Override
+	public void paint(Graphics g){
+		super.paint(g);
+		Graphics2D g2d = (Graphics2D) g;
+		//color
+		g2d.setColor(Color.blue);
+		g2d.fillRect(50, 50,200,100);
+		g2d.clearRect(100,100,100, 100);
+		g2d.fillArc(300,300,100, 100,45, 180);
+		g2d.drawArc(250,300,100, 100,45, 180);
+		g2d.setColor(Color.black);
+		g2d.drawLine(0, 0, 500, 500);
+		g2d.drawOval(400, 400, 50, 80);
+		g2d.fillOval(350, 400, 50, 80);
+		
+		int xPoints[]={100,250,300};
+		int yPoints[]={100,200,300};
+		
+		//g2d.drawPolyline(xPoints, yPoints, 3);
+		g2d.setColor(Color.red);
+		g2d.fillPolygon(xPoints, yPoints, 3);
+		
+		g2d.setFont(new Font("Arial",Font.BOLD,40));
+		g2d.drawString("Hola",250,50);
+		
+		g2d.setStroke(new BasicStroke(10));
+		g2d.drawRoundRect(420, 200,150 , 130, 10,10);
+		
+		try {
+			BufferedImage image = ImageIO.read(new File("src/usuario.png"));
+			g2d.drawImage(image, 200, 400, null);
+			
+		}catch(IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		
+		
 
-
-
-
+		
+		//g2d.drawLine(30,70,770,70);
+		
+		
+	}
+	
+	
+	
 	public void panelLayout() {
-        this.setSize(480, 650);
+		
+		this.setSize(480, 650);
+		JPanel panel = new JPanel();
+		panel.setSize(this.getWidth(), 500);
+		panel.setBackground(Color.decode("#E16D8D"));
+		panel.setLayout(new BorderLayout());
+		
+		JLabel text = new JLabel("Interés",0);
+		text.setOpaque(true);
+		text.setFont(new Font("Arial",Font.BOLD,40));
+		text.setForeground(Color.orange);
+		text.setBackground(Color.white);
+		panel.add(text,BorderLayout.NORTH);
+		
+		JPanel centro = new JPanel();
+		centro.setBackground(Color.cyan);
+		centro.setLayout(new GridBagLayout());
+		panel.add(centro,BorderLayout.CENTER);
+		
+		JPanel centro2 = new JPanel();
+		panel.setSize(this.getWidth(), this.getHeight());
+		centro2.setBackground(Color.black);
+		centro.add(centro2);
+		
+		
+		/*
+		for(int i =0;i<=8;i++) {
+			if(i==7 || i==8) {
+				
+				JButton button = new JButton("lol");
+				button.setBounds(10, 10, 200, 50);
+				button.setHorizontalAlignment(SwingConstants.LEFT);
+				centro.add(button);
+				
+			}
+			if(i==1 || i==3 || i==5) {
+				
+				JLabel label = new JLabel("juas juas");
+				centro.add(label);
+				
+			}
+			if(i==2 || i==4 || i==6) {
+				
+				JTextField field = new JTextField("juas juas");
+				centro.add(field);
+				
+			}
+		}
 
-        JPanel panel = new JPanel();
-        panel.setSize(this.getWidth(), 550);
-        panel.setBackground(Color.decode("#99FF99"));
-        panel.setLayout(new BorderLayout());
-
-        JLabel text = new JLabel("Interés");
-        text.setOpaque(true);
-        text.setFont(new Font("Arial", Font.ITALIC, 30));
-        text.setForeground(Color.red);
-        text.setBackground(Color.white);
-        panel.add(text, BorderLayout.NORTH);
-
-        JPanel centro = new JPanel();
-        centro.setBackground(Color.decode("#99FF99"));
-        centro.setLayout(new BoxLayout(centro, BoxLayout.Y_AXIS));
-        centro.setBorder(new MatteBorder(20, 20, 40, 40, Color.white));
-
-        // Crear y agregar los tres paneles para la parte central del layout
-        JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
-        panel1.setOpaque(false);
-        panel1.setPreferredSize(new Dimension(400, 20));
-
-        JLabel labelPanel1 = new JLabel("Calcular interés");
-        labelPanel1.setFont(new Font("Arial", Font.ITALIC, 22));
-        panel1.add(labelPanel1);
-
-        centro.add(panel1);
-
-        JPanel panel2 = new JPanel();
-        panel2.setOpaque(false);
-        panel2.setPreferredSize(new Dimension(400, 280));
-        panel2.setLayout(new GridLayout(3, 2));
-
-        String labels[] = {"Capital:                               ", "Tiempo:                              ", "Tasa de interés:               "};
-
-        for (int i = 0; i < 3; i++) {
-            JPanel cellPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            cellPanel.setOpaque(false);
-
-            JLabel label = new JLabel(labels[i]);
-            label.setFont(new Font("Arial", Font.BOLD, 20));
-            cellPanel.add(label);
-
-            JTextField textField = new JTextField();
-            textField.setPreferredSize(new Dimension(200, 25));
-            cellPanel.add(textField);
-
-            panel2.add(cellPanel);
-        }
-
-        centro.add(panel2);
-
-        JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        panel3.setBackground(Color.red);
-        panel3.setPreferredSize(new Dimension(400, 100));
-        panel3.setOpaque(false);
-
-        JButton button1 = new JButton("Calcular");
-        button1.setFont(new Font("Arial", Font.BOLD, 24));
-        button1.setBackground(Color.gray);
-        button1.setFocusable(false);
-        button1.setBorderPainted(false);
-
-        JButton button2 = new JButton("Cancelar");
-        button2.setFont(new Font("Arial", Font.BOLD, 24));
-        button2.setBackground(Color.gray);
-        button2.setFocusable(false);
-        button2.setBorderPainted(false);
-
-        panel3.add(button1);
-        panel3.add(button2);
-
-        centro.add(panel3);
-
-        panel.add(centro, BorderLayout.CENTER);
-
-        JPanel panelmitad = new JPanel();
-        panelmitad.setLocation(0, 550);
-        panelmitad.setSize(this.getWidth(), 300);
-        panelmitad.setBackground(Color.decode("#FF9999"));
-        panelmitad.setBorder(new MatteBorder(20, 20, 40, 40, Color.white));
-        
-        panelmitad.setLayout(new GridLayout(2, 2));
-
-        String labels2[] = {"Interés:                             ", "Monto:                              ",};
-
-        for (int i = 0; i < 2; i++) {
-            JPanel cellPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-           cellPanel.setOpaque(false);
-
-            JLabel label = new JLabel(labels2[i]);
-            label.setFont(new Font("Arial", Font.BOLD, 20));
-            cellPanel.add(label);
-
-            JTextField textField = new JTextField();
-            textField.setPreferredSize(new Dimension(200, 25));
-            textField.setEditable(false);
-            cellPanel.add(textField);
-
-            panelmitad.add(cellPanel);
-        }
-
-        //centro.add(panel2);
-
-        this.add(panelmitad);
-        this.add(panel);
-    }
-
-
-
-	/*
-	for(int i =0;i<=8;i++) {
-	if(i==7 || i==8) {
-
-	JButton button = new JButton("lol");
-	button.setBounds(10, 10, 200, 50);
-	button.setHorizontalAlignment(SwingConstants.LEFT);
-	centro.add(button);
-
-	}
-	if(i==1 || i==3 || i==5) {
-
-	JLabel label = new JLabel("juas juas");
-	centro.add(label);
-
-	}
-	if(i==2 || i==4 || i==6) {
-
-	JTextField field = new JTextField("juas juas");
-	centro.add(field);
-
-	}
-	}
-
-
-
-	JTextField fieldUser = new JTextField();
-	fieldUser.setBounds(60,150,370,35);
-	fieldUser.setOpaque(true);
-	fieldUser.setBackground(Color.white);
-	centro.add(fieldUser);
-
-	JLabel textDato1 = new JLabel("Interés",0);
-	textDato1.setOpaque(true);
-	textDato1.setFont(new Font("Arial",Font.BOLD,40));
-	textDato1.setForeground(Color.orange);
-	textDato1.setBackground(Color.white);
-	centro.add(textDato1,BorderLayout.CENTER);
-
-	JLabel textDato2 = new JLabel("Interés",0);
-	textDato2.setOpaque(false);
-	textDato2.setLocation(70, 70);
-	textDato2.setBounds(10, 40, 100,100);
-	textDato2.setFont(new Font("Arial",Font.BOLD,40));
-	textDato2.setForeground(Color.orange);
-	textDato2.setBackground(Color.white);
-	centro.add(textDato2,BorderLayout.CENTER);
+		
+		
+		JTextField fieldUser = new JTextField();
+		fieldUser.setBounds(60,150,370,35);
+		fieldUser.setOpaque(true);
+		fieldUser.setBackground(Color.white);
+		centro.add(fieldUser);
+	
+		JLabel textDato1 = new JLabel("Interés",0);
+		textDato1.setOpaque(true);
+		textDato1.setFont(new Font("Arial",Font.BOLD,40));
+		textDato1.setForeground(Color.orange);
+		textDato1.setBackground(Color.white);
+		centro.add(textDato1,BorderLayout.CENTER);
+		
+		JLabel textDato2 = new JLabel("Interés",0);
+		textDato2.setOpaque(false);
+		textDato2.setLocation(70, 70);
+		textDato2.setBounds(10, 40, 100,100);
+		textDato2.setFont(new Font("Arial",Font.BOLD,40));
+		textDato2.setForeground(Color.orange);
+		textDato2.setBackground(Color.white);
+		centro.add(textDato2,BorderLayout.CENTER);
 	*/
+
+		
+		
+		JPanel panel2 = new JPanel();
+		panel2.setLocation(0,500);
+		panel2.setSize(this.getWidth(), this.getHeight());
+		panel2.setBackground(Color.GREEN);
+		
+		
+		this.add(panel2);
+		
+		
+		this.add(panel);
+		
+		
+		
+		
+		
+	}
 	public void calculadoraGrid(){
 		
 		this.setSize(480, 650);
@@ -252,7 +234,7 @@ public class Ventana extends JFrame {
 		panel.add(text,BorderLayout.NORTH);
 		
 		JPanel centro = new JPanel();
-		centro.setBackground(Color.orange);
+		centro.setBackground(Color.cyan);
 		centro.setLayout(new GridLayout(4,3,10,10));
 		panel.add(centro,BorderLayout.CENTER);
 		
@@ -269,7 +251,7 @@ public class Ventana extends JFrame {
 		east.setLayout(new GridLayout(3,1,10,10));
 		panel.add(east,BorderLayout.EAST);
 		
-		String btns2[]= {"+","-","="};
+		String btns2[]= {"    +    ","    -    ","   =    "};
 		for(int i =0;i<3;i++) {
 			JButton button = new JButton(btns2[i]);
 			//button.setSize(50, 50);
@@ -282,7 +264,7 @@ public class Ventana extends JFrame {
 		west.setLayout(new BoxLayout(west,BoxLayout.Y_AXIS));
 		panel.add(west,BorderLayout.WEST);
 		
-		String btns3[]= {"/","CE","C"};
+		String btns3[]= {"   /    ","   CE    ","    C     "};
 		for(int i =0;i<3;i++) {
 			JButton button = new JButton(btns3[i]);
 			//button.setSize(50, 50);

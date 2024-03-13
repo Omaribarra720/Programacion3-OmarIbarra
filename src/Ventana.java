@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.imageio.ImageIO;
@@ -69,9 +70,10 @@ public class Ventana extends JFrame {
 
 	public void IniciarComponentes() {
 		//this.admin();
-		this.login();
-		this.registro();
+		//this.login();
+		//this.registro();
 		//this.calculadoraGrid();
+		this.botones();
 		//this.panelLayout();
 		//this.paint(getGraphics());
 
@@ -635,6 +637,7 @@ public class Ventana extends JFrame {
 
 
 	public void login() {
+
 		this.setMinimumSize(new Dimension(1000,900));
 
 		JPanel login = new JPanel();
@@ -809,6 +812,53 @@ public class Ventana extends JFrame {
 	}
 
 
+	public void botones() {
 
+		this.setSize(500,750);
+		
+		JPanel botones = new JPanel();
+		botones.setSize(this.getWidth(), this.getHeight());
+		botones.setBackground(Color.decode("#3C61A9"));
+		botones.setLayout(null);
+		
+		this.add(botones);
+		
+		JButton btn = new JButton("Click me!");
+		btn.setBounds(150,600,170,50);
+		btn.setBackground(Color.decode("#DCCA8A"));
+		btn.setFont(new Font ("Arial", Font.BOLD, 20));
+		botones.add(btn);
+		btn.addActionListener((ActionListener) new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				int x = (int)Math.floor(Math.random()*450+1);
+				int y = (int)Math.floor(Math.random()*650+1);
+				
+				int w = (int)Math.floor(Math.random()*120+1);
+				int h = (int)Math.floor(Math.random()*120+1);
+				
+				Random rand = new Random();
+				float r = rand.nextFloat();
+				float g = rand.nextFloat();
+				float b = rand.nextFloat();
+				
+				
+				JButton otroBtn = new JButton("Click me!");
+				otroBtn.setBounds(x,y,w,h);
+				otroBtn.setBackground(new Color(r, g, b));
+				
+				
+				
+				botones.add(otroBtn);
+				
+				getContentPane().repaint();
+				getContentPane().revalidate();
+			}});
+
+		
+	}
 
 }

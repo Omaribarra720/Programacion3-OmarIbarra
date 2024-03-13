@@ -1,3 +1,4 @@
+
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,6 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -40,8 +43,8 @@ import javax.swing.SwingConstants;
 
 
 //OmarIbarra
-public class Ventana extends JFrame {
-
+public class Ventana extends JFrame implements MouseListener{
+	private JPanel botonesPanel;
 	private static final String JTextArea = null;
 
 
@@ -815,60 +818,100 @@ public class Ventana extends JFrame {
 
 	public void botones() {
 
-		this.setSize(500,750);
+		this.setSize(500, 750);
 
-		JPanel botones = new JPanel();
-		botones.setSize(this.getWidth(), this.getHeight());
-		botones.setBackground(Color.decode("#3C61A9"));
-		botones.setLayout(null);
-		//this.addMouseListener(this)convertir panel global;
-		this.add(botones);
+        botonesPanel = new JPanel();
+        botonesPanel.setSize(this.getWidth(), this.getHeight());
+        botonesPanel.setBackground(Color.decode("#3C61A9"));
+        
+        botonesPanel.setLayout(null);
+        this.addMouseListener((MouseListener) this);
+        // Agregamos el panel a la ventana
+        this.add(botonesPanel);
 
-		JButton btn = new JButton("Click me");
-		btn.setBounds(150,600,170,50);
-		btn.setBackground(Color.decode("#DCCA8A"));
-		btn.setFont(new Font ("Arial", Font.BOLD, 20));
-		botones.add(btn);
-		btn.addActionListener((ActionListener) new ActionListener() {
+        JButton btn = new JButton("Click me");
+        btn.setBounds(150, 600, 170, 50);
+        btn.setBackground(Color.decode("#DCCA8A"));
+        btn.setFont(new Font("Arial", Font.BOLD, 20));
+        botonesPanel.add(btn);
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int x = (int) Math.floor(Math.random() * 450 + 1);
+                int y = (int) Math.floor(Math.random() * 650 + 1);
+                int w = (int) Math.floor(Math.random() * 120 + 1);
+                int h = (int) Math.floor(Math.random() * 120 + 1);
+                Random rand = new Random();
+                float r = rand.nextFloat();
+                float g = rand.nextFloat();
+                float b = rand.nextFloat();
+                JButton otroBtn = new JButton(r + "," + g + "," + b);
+                otroBtn.setBounds(x, y, w, h);
+                otroBtn.setBackground(new Color(r, g, b));
+                otroBtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                });
+                botonesPanel.add(otroBtn);
+                getContentPane().repaint();
+                getContentPane().revalidate();
+            }
+        });
+    }
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+   
+	@Override
+    public void mouseClicked(MouseEvent e) {
+        
+    	
+    
+    }
+    @Override
+    public void mousePressed(MouseEvent e) {
+   
+       
+    }
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    	 System.out.println("Se hizo clic en: (" + e.getX() + ", " + e.getY() + ")");
 
-				int x = (int)Math.floor(Math.random()*450+1);
-				int y = (int)Math.floor(Math.random()*650+1);
+         int w = (int) Math.floor(Math.random() * 120 + 1);
+         int h = (int) Math.floor(Math.random() * 120 + 1);
+         
+         Random rand = new Random();
+         float r = rand.nextFloat();
+         float g = rand.nextFloat();
+         float b = rand.nextFloat();
+         JButton otroBtn = new JButton(r + "," + g + "," + b);
+         otroBtn.setBounds(e.getX(), e.getY(), w, h);
+         
+         otroBtn.setBackground(new Color(r, g, b));
+         otroBtn.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",
+                         JOptionPane.ERROR_MESSAGE);
+             }
+         });
+         botonesPanel.add(otroBtn);
+     
+         getContentPane().repaint();
+         getContentPane().revalidate();
+       
+    }
+    @Override
+    public void mouseEntered(MouseEvent e) {
+      
+    }
+    @Override
+    public void mouseExited(MouseEvent e) {
+       
+    }
 
-				int w = (int)Math.floor(Math.random()*120+1);
-				int h = (int)Math.floor(Math.random()*120+1);
-
-				Random rand = new Random();
-				float r = rand.nextFloat();
-				float g = rand.nextFloat();
-				float b = rand.nextFloat();
-
-
-				JButton otroBtn = new JButton(r+","+g+","+b);
-				otroBtn.setBounds(x,y,w,h);
-				otroBtn.setBackground(new Color(r, g, b));
-
-				botones.add(otroBtn);
-
-				otroBtn.addActionListener((ActionListener) new ActionListener(){
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						JOptionPane.showMessageDialog(null,r+","+g+","+b,"Inane warning",JOptionPane.ERROR_MESSAGE);
-
-					}});
-
-			
-
-				getContentPane().repaint();
-				getContentPane().revalidate();
-			}});
-
-
-	}
+   
 
 }

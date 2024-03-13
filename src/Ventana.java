@@ -29,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -570,7 +571,7 @@ public class Ventana extends JFrame {
 		rbtn2.setBackground(Color.decode("#FFCCEE"));
 		rbtn2.setOpaque(true);
 		registro.add(rbtn2);
-		
+
 		ButtonGroup grupo = new ButtonGroup();
 		grupo.add(rbtn2);
 		grupo.add(rbtn1);
@@ -594,7 +595,7 @@ public class Ventana extends JFrame {
 				// TODO Auto-generated method stub
 				String usr = fieldUser.getText();
 				String bio = textBio.getText();
-				
+
 
 
 
@@ -606,10 +607,10 @@ public class Ventana extends JFrame {
 
 				}
 				else {
-					
+
 					fieldUser.setBorder(BorderFactory.createLineBorder(Color.green,2));
 				}
-				
+
 				if(bio.length()==0) {
 					textBio.setBorder(BorderFactory.createLineBorder(Color.red,2));
 					System.out.println("Se necesita bio");
@@ -625,7 +626,7 @@ public class Ventana extends JFrame {
 					rbtn1.setBorderPainted(true);
 					rbtn1.setBorder(BorderFactory.createLineBorder(Color.red,2));
 					System.out.println("Se necesita aceptar");
-					
+
 				}
 
 			}});
@@ -815,15 +816,15 @@ public class Ventana extends JFrame {
 	public void botones() {
 
 		this.setSize(500,750);
-		
+
 		JPanel botones = new JPanel();
 		botones.setSize(this.getWidth(), this.getHeight());
 		botones.setBackground(Color.decode("#3C61A9"));
 		botones.setLayout(null);
-		
+		//this.addMouseListener(this)convertir panel global;
 		this.add(botones);
-		
-		JButton btn = new JButton("Click me!");
+
+		JButton btn = new JButton("Click me");
 		btn.setBounds(150,600,170,50);
 		btn.setBackground(Color.decode("#DCCA8A"));
 		btn.setFont(new Font ("Arial", Font.BOLD, 20));
@@ -833,32 +834,41 @@ public class Ventana extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+
 				int x = (int)Math.floor(Math.random()*450+1);
 				int y = (int)Math.floor(Math.random()*650+1);
-				
+
 				int w = (int)Math.floor(Math.random()*120+1);
 				int h = (int)Math.floor(Math.random()*120+1);
-				
+
 				Random rand = new Random();
 				float r = rand.nextFloat();
 				float g = rand.nextFloat();
 				float b = rand.nextFloat();
-				
-				
-				JButton otroBtn = new JButton("Click me!");
+
+
+				JButton otroBtn = new JButton(r+","+g+","+b);
 				otroBtn.setBounds(x,y,w,h);
 				otroBtn.setBackground(new Color(r, g, b));
-				
-				
-				
+
 				botones.add(otroBtn);
-				
+
+				otroBtn.addActionListener((ActionListener) new ActionListener(){
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						JOptionPane.showMessageDialog(null,r+","+g+","+b,"Inane warning",JOptionPane.ERROR_MESSAGE);
+
+					}});
+
+			
+
 				getContentPane().repaint();
 				getContentPane().revalidate();
 			}});
 
-		
+
 	}
 
 }

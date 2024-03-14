@@ -859,6 +859,7 @@ public class Ventana extends JFrame implements MouseListener {
                 		getContentPane().repaint();
                         getContentPane().revalidate();
                         
+                        
                         String command = ((JButton) e.getSource()).getText();
                     	/*
                         JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",
@@ -916,10 +917,20 @@ public class Ventana extends JFrame implements MouseListener {
     }
     @Override
     public void mouseEntered(MouseEvent e) {
+    	
+        Random rand = new Random();
+        float r = rand.nextFloat();
+        float g = rand.nextFloat();
+        float b = rand.nextFloat();
       
+        botonesPanel.setBackground(new Color(r, g, b));
+                  
+        getContentPane().repaint();
+        getContentPane().revalidate();
     }
     @Override
     public void mouseExited(MouseEvent e) {
+    	
        
     }
 }

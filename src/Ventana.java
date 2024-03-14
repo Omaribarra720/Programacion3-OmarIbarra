@@ -1,4 +1,3 @@
-
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -43,7 +42,7 @@ import javax.swing.SwingConstants;
 
 
 //OmarIbarra
-public class Ventana extends JFrame implements MouseListener{
+public class Ventana extends JFrame implements MouseListener {
 	private JPanel botonesPanel;
 	private static final String JTextArea = null;
 
@@ -849,10 +848,22 @@ public class Ventana extends JFrame implements MouseListener{
                 otroBtn.setBounds(x, y, w, h);
                 otroBtn.setBackground(new Color(r, g, b));
                 otroBtn.addActionListener(new ActionListener() {
+                	
+                	
+                	
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                    	JButton yo = ((JButton) e.getSource());
+                		botonesPanel.remove(yo);
+                		
+                		getContentPane().repaint();
+                        getContentPane().revalidate();
+                        
+                        String command = ((JButton) e.getSource()).getText();
+                    	/*
                         JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",
                                 JOptionPane.ERROR_MESSAGE);
+                                */
                     }
                 });
                 botonesPanel.add(otroBtn);
@@ -887,7 +898,7 @@ public class Ventana extends JFrame implements MouseListener{
          float g = rand.nextFloat();
          float b = rand.nextFloat();
          JButton otroBtn = new JButton(r + "," + g + "," + b);
-         otroBtn.setBounds(e.getX(), e.getY(), w, h);
+         otroBtn.setBounds(e.getX()-40, e.getY()-40, w, h);
          
          otroBtn.setBackground(new Color(r, g, b));
          otroBtn.addActionListener(new ActionListener() {
@@ -911,7 +922,4 @@ public class Ventana extends JFrame implements MouseListener{
     public void mouseExited(MouseEvent e) {
        
     }
-
-   
-
 }

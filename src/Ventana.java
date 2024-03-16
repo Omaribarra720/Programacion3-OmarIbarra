@@ -66,9 +66,9 @@ public class Ventana extends JFrame implements MouseListener,KeyListener {
 		//this.setMinimumSize(new Dimension(750,900));
 		this.setSize(1000,500);
 
-		
+
 		this.setLocationRelativeTo(null);
-		
+
 		this.IniciarComponentes();
 		this.setLayout(null);
 		this.setVisible(true);
@@ -81,10 +81,10 @@ public class Ventana extends JFrame implements MouseListener,KeyListener {
 		//this.registro();
 		//this.calculadoraGrid();
 		this.botones();
-	
+
 		//this.panelLayout();
 		//this.paint(getGraphics());
-		
+
 		this.repaint();
 		this.revalidate();
 
@@ -821,133 +821,141 @@ public class Ventana extends JFrame implements MouseListener,KeyListener {
 
 
 	public void botones() {
-	    this.setSize(500, 750);
+		this.setSize(500, 750);
 
-	    botonesPanel = new JPanel();
-	    botonesPanel.setSize(this.getWidth(), this.getHeight());
-	    botonesPanel.setBackground(Color.decode("#3C61A9"));
-	    
-	    botonesPanel.setLayout(null);
-	    botonesPanel.addMouseListener((MouseListener) this);
-	    botonesPanel.addKeyListener((KeyListener) this);
-	    
-	    this.add(botonesPanel);
+		botonesPanel = new JPanel();
+		botonesPanel.setSize(this.getWidth(), this.getHeight());
+		botonesPanel.setBackground(Color.decode("#3C61A9"));
 
-	    JButton btn = new JButton("Click me");
-	    btn.setBounds(150, 600, 170, 50);
-	    btn.setBackground(Color.decode("#DCCA8A"));
-	    btn.setFont(new Font("Arial", Font.BOLD, 20));
-	    botonesPanel.add(btn);
-	    btn.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            int x = (int) Math.floor(Math.random() * 450 + 1);
-	            int y = (int) Math.floor(Math.random() * 650 + 1);
-	            int w = (int) Math.floor(Math.random() * 120 + 1);
-	            int h = (int) Math.floor(Math.random() * 120 + 1);
-	            Random rand = new Random();
-	            float r = rand.nextFloat();
-	            float g = rand.nextFloat();
-	            float b = rand.nextFloat();
-	            JButton otroBtn = new JButton(r + "," + g + "," + b);
-	            otroBtn.setBounds(x, y, w, h);
-	            otroBtn.setBackground(new Color(r, g, b));
-	            otroBtn.addActionListener(new ActionListener() {
-	                @Override
-	                public void actionPerformed(ActionEvent e) {
-	                    JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",JOptionPane.ERROR_MESSAGE);
-	                    botonesPanel.setFocusable(true);
-	             	    botonesPanel.requestFocusInWindow();
-	                }
-	            });
-	            botonesPanel.add(otroBtn);
-	            getContentPane().repaint();
-	            getContentPane().revalidate();
-	        }
-	    });
+		botonesPanel.setLayout(null);
+		botonesPanel.addMouseListener((MouseListener) this);
+		botonesPanel.addKeyListener((KeyListener) this);
 
-	
-	    botonesPanel.setFocusable(true);
-	    botonesPanel.requestFocusInWindow();
+		this.add(botonesPanel);
+
+		JButton btn = new JButton("Click me");
+		btn.setBounds(150, 600, 170, 50);
+		btn.setBackground(Color.decode("#DCCA8A"));
+		btn.setFont(new Font("Arial", Font.BOLD, 20));
+		botonesPanel.add(btn);
+		btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int x = (int) Math.floor(Math.random() * 450 + 1);
+				int y = (int) Math.floor(Math.random() * 650 + 1);
+				int w = (int) Math.floor(Math.random() * 120 + 1);
+				int h = (int) Math.floor(Math.random() * 120 + 1);
+				Random rand = new Random();
+				float r = rand.nextFloat();
+				float g = rand.nextFloat();
+				float b = rand.nextFloat();
+				JButton otroBtn = new JButton(r + "," + g + "," + b);
+				otroBtn.setBounds(x, y, w, h);
+				otroBtn.setBackground(new Color(r, g, b));
+				otroBtn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",JOptionPane.ERROR_MESSAGE);
+						botonesPanel.setFocusable(true);
+						botonesPanel.requestFocusInWindow();
+					}
+				});
+				botonesPanel.add(otroBtn);
+				getContentPane().repaint();
+				getContentPane().revalidate();
+			}
+		});
+
+
+		botonesPanel.setFocusable(true);
+		botonesPanel.requestFocusInWindow();
 	}
 	@Override
-    public void mouseClicked(MouseEvent e) {
-               
-    }
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        
-    	 System.out.println("Se hizo clic en: (" + e.getX() + ", " + e.getY() + ")");
+	public void mouseClicked(MouseEvent e) {
 
-         int w = (int) Math.floor(Math.random() * 120 + 1);
-         int h = (int) Math.floor(Math.random() * 120 + 1);
-         
-         Random rand = new Random();
-         float r = rand.nextFloat();
-         float g = rand.nextFloat();
-         float b = rand.nextFloat();
-         JButton otroBtn = new JButton(r + "," + g + "," + b);
-         otroBtn.setBounds(e.getX()-40, e.getY()-40, w, h);
-         
-         otroBtn.setBackground(new Color(r, g, b));
-         otroBtn.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",JOptionPane.ERROR_MESSAGE);
-                botonesPanel.setFocusable(true);
-         	    botonesPanel.requestFocusInWindow();
-             }
-         });
-         botonesPanel.add(otroBtn);
-         botonesPanel.setFocusable(true);
-         botonesPanel.requestFocusInWindow();
-         getContentPane().repaint();
-         getContentPane().revalidate();
-       
-    }
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    	
-        Random rand = new Random();
-        float r = rand.nextFloat();
-        float g = rand.nextFloat();
-        float b = rand.nextFloat();
-      
-        botonesPanel.setBackground(new Color(r, g, b));
-                  
-        getContentPane().repaint();
-        getContentPane().revalidate();
-    }
-    @Override
-    public void mouseExited(MouseEvent e) {
-    	
-       
-    }
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+		System.out.println("Se hizo clic en: (" + e.getX() + ", " + e.getY() + ")");
+
+		int w = (int) Math.floor(Math.random() * 120 + 1);
+		int h = (int) Math.floor(Math.random() * 120 + 1);
+
+		Random rand = new Random();
+		float r = rand.nextFloat();
+		float g = rand.nextFloat();
+		float b = rand.nextFloat();
+		JButton otroBtn = new JButton(r + "," + g + "," + b);
+		otroBtn.setBounds(e.getX()-40, e.getY()-40, w, h);
+
+		otroBtn.setBackground(new Color(r, g, b));
+		otroBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",JOptionPane.ERROR_MESSAGE);
+				botonesPanel.setFocusable(true);
+				botonesPanel.requestFocusInWindow();
+			}
+		});
+		botonesPanel.add(otroBtn);
+		botonesPanel.setFocusable(true);
+		botonesPanel.requestFocusInWindow();
+		getContentPane().repaint();
+		getContentPane().revalidate();
+
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+		Random rand = new Random();
+		float r = rand.nextFloat();
+		float g = rand.nextFloat();
+		float b = rand.nextFloat();
+
+		botonesPanel.setBackground(new Color(r, g, b));
+
+		getContentPane().repaint();
+		getContentPane().revalidate();
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-				
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-	        if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-	        Component[] elementos = botonesPanel.getComponents();
-	        for (int i = 0; i < elementos.length; i++) {
-	            botonesPanel.remove(elementos[i]);
-	        }
-	        botonesPanel.repaint();
-	        botonesPanel.revalidate();
-	    }
+		if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+			Component[] elementos = botonesPanel.getComponents();
+			for (int i = 0; i < elementos.length; i++) {
+				botonesPanel.remove(elementos[i]);
+			}
+			botonesPanel.repaint();
+			botonesPanel.revalidate();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_W) {
+			Component[] elementos = botonesPanel.getComponents();
+			for (int i = 0; i < elementos.length; i++) {
+				elementos[i].setSize(elementos[i].getWidth()+1,elementos[i].getHeight()+1);
+			}
+			botonesPanel.repaint();
+			botonesPanel.revalidate();
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

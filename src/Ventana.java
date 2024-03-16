@@ -1,6 +1,7 @@
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -10,6 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -42,7 +45,7 @@ import javax.swing.SwingConstants;
 
 
 //OmarIbarra
-public class Ventana extends JFrame implements MouseListener {
+public class Ventana extends JFrame implements MouseListener,KeyListener {
 	private JPanel botonesPanel;
 	private static final String JTextArea = null;
 
@@ -63,8 +66,9 @@ public class Ventana extends JFrame implements MouseListener {
 		//this.setMinimumSize(new Dimension(750,900));
 		this.setSize(1000,500);
 
-
+		
 		this.setLocationRelativeTo(null);
+		
 		this.IniciarComponentes();
 		this.setLayout(null);
 		this.setVisible(true);
@@ -77,9 +81,10 @@ public class Ventana extends JFrame implements MouseListener {
 		//this.registro();
 		//this.calculadoraGrid();
 		this.botones();
+	
 		//this.panelLayout();
 		//this.paint(getGraphics());
-
+		
 		this.repaint();
 		this.revalidate();
 
@@ -816,75 +821,61 @@ public class Ventana extends JFrame implements MouseListener {
 
 
 	public void botones() {
+	    this.setSize(500, 750);
 
-		this.setSize(500, 750);
+	    botonesPanel = new JPanel();
+	    botonesPanel.setSize(this.getWidth(), this.getHeight());
+	    botonesPanel.setBackground(Color.decode("#3C61A9"));
+	    
+	    botonesPanel.setLayout(null);
+	    botonesPanel.addMouseListener((MouseListener) this);
+	    botonesPanel.addKeyListener((KeyListener) this);
+	    
+	    this.add(botonesPanel);
 
-        botonesPanel = new JPanel();
-        botonesPanel.setSize(this.getWidth(), this.getHeight());
-        botonesPanel.setBackground(Color.decode("#3C61A9"));
-        
-        botonesPanel.setLayout(null);
-        this.addMouseListener((MouseListener) this);
-        // Agregamos el panel a la ventana
-        this.add(botonesPanel);
+	    JButton btn = new JButton("Click me");
+	    btn.setBounds(150, 600, 170, 50);
+	    btn.setBackground(Color.decode("#DCCA8A"));
+	    btn.setFont(new Font("Arial", Font.BOLD, 20));
+	    botonesPanel.add(btn);
+	    btn.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            int x = (int) Math.floor(Math.random() * 450 + 1);
+	            int y = (int) Math.floor(Math.random() * 650 + 1);
+	            int w = (int) Math.floor(Math.random() * 120 + 1);
+	            int h = (int) Math.floor(Math.random() * 120 + 1);
+	            Random rand = new Random();
+	            float r = rand.nextFloat();
+	            float g = rand.nextFloat();
+	            float b = rand.nextFloat();
+	            JButton otroBtn = new JButton(r + "," + g + "," + b);
+	            otroBtn.setBounds(x, y, w, h);
+	            otroBtn.setBackground(new Color(r, g, b));
+	            otroBtn.addActionListener(new ActionListener() {
+	                @Override
+	                public void actionPerformed(ActionEvent e) {
+	                    JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",JOptionPane.ERROR_MESSAGE);
+	                    botonesPanel.setFocusable(true);
+	             	    botonesPanel.requestFocusInWindow();
+	                }
+	            });
+	            botonesPanel.add(otroBtn);
+	            getContentPane().repaint();
+	            getContentPane().revalidate();
+	        }
+	    });
 
-        JButton btn = new JButton("Click me");
-        btn.setBounds(150, 600, 170, 50);
-        btn.setBackground(Color.decode("#DCCA8A"));
-        btn.setFont(new Font("Arial", Font.BOLD, 20));
-        botonesPanel.add(btn);
-        btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int x = (int) Math.floor(Math.random() * 450 + 1);
-                int y = (int) Math.floor(Math.random() * 650 + 1);
-                int w = (int) Math.floor(Math.random() * 120 + 1);
-                int h = (int) Math.floor(Math.random() * 120 + 1);
-                Random rand = new Random();
-                float r = rand.nextFloat();
-                float g = rand.nextFloat();
-                float b = rand.nextFloat();
-                JButton otroBtn = new JButton(r + "," + g + "," + b);
-                otroBtn.setBounds(x, y, w, h);
-                otroBtn.setBackground(new Color(r, g, b));
-                otroBtn.addActionListener(new ActionListener() {
-                	
-                	
-                	
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                    	JButton yo = ((JButton) e.getSource());
-                		botonesPanel.remove(yo);
-                		
-                		getContentPane().repaint();
-                        getContentPane().revalidate();
-                        
-                        
-                        String command = ((JButton) e.getSource()).getText();
-                    	/*
-                        JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",
-                                JOptionPane.ERROR_MESSAGE);
-                                */
-                    }
-                });
-                botonesPanel.add(otroBtn);
-                getContentPane().repaint();
-                getContentPane().revalidate();
-            }
-        });
-    }
-
-   
+	
+	    botonesPanel.setFocusable(true);
+	    botonesPanel.requestFocusInWindow();
+	}
 	@Override
     public void mouseClicked(MouseEvent e) {
-        
-    	
-    
+               
     }
     @Override
     public void mousePressed(MouseEvent e) {
-   
-       
     }
     @Override
     public void mouseReleased(MouseEvent e) {
@@ -905,12 +896,14 @@ public class Ventana extends JFrame implements MouseListener {
          otroBtn.addActionListener(new ActionListener() {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",
-                         JOptionPane.ERROR_MESSAGE);
+                 JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",JOptionPane.ERROR_MESSAGE);
+                botonesPanel.setFocusable(true);
+         	    botonesPanel.requestFocusInWindow();
              }
          });
          botonesPanel.add(otroBtn);
-     
+         botonesPanel.setFocusable(true);
+         botonesPanel.requestFocusInWindow();
          getContentPane().repaint();
          getContentPane().revalidate();
        
@@ -933,4 +926,28 @@ public class Ventana extends JFrame implements MouseListener {
     	
        
     }
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+				
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	        if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+	        Component[] elementos = botonesPanel.getComponents();
+	        for (int i = 0; i < elementos.length; i++) {
+	            botonesPanel.remove(elementos[i]);
+	        }
+	        botonesPanel.repaint();
+	        botonesPanel.revalidate();
+	    }
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

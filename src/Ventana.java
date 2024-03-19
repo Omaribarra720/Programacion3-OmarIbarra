@@ -951,6 +951,61 @@ public class Ventana extends JFrame implements MouseListener,KeyListener {
 			botonesPanel.repaint();
 			botonesPanel.revalidate();
 		}
+
+		//abajo
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			Component[] elementos = botonesPanel.getComponents();
+			for (int i = 0; i < elementos.length; i++) {
+				elementos[i].setLocation(elementos[i].getX(),elementos[i].getY()+1);;
+			}
+			botonesPanel.repaint();
+			botonesPanel.revalidate();
+		}
+		//abajo
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			Component[] elementos = botonesPanel.getComponents();
+			for (int i = 0; i < elementos.length; i++) {
+				elementos[i].setLocation(elementos[i].getX(),elementos[i].getY()+1);;
+			}
+			botonesPanel.repaint();
+			botonesPanel.revalidate();
+		}
+
+		
+
+		//arriba
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			Component[] elementos = botonesPanel.getComponents();
+			for (int i = 0; i < elementos.length; i++) {
+				elementos[i].setLocation(elementos[i].getX(),elementos[i].getY()-1);;
+			}
+			botonesPanel.repaint();
+			botonesPanel.revalidate();
+		}
+
+
+		//derecha
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			Component[] elementos = botonesPanel.getComponents();
+			for (int i = 0; i < elementos.length; i++) {
+				elementos[i].setLocation(elementos[i].getX()+1,elementos[i].getY());;
+			}
+			botonesPanel.repaint();
+			botonesPanel.revalidate();
+		}
+		//izuierda
+				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					Component[] elementos = botonesPanel.getComponents();
+					for (int i = 0; i < elementos.length; i++) {
+						elementos[i].setLocation(elementos[i].getX()-1,elementos[i].getY());;
+					}
+					botonesPanel.repaint();
+					botonesPanel.revalidate();
+				}
+
+
+
+
 	}
 
 	@Override

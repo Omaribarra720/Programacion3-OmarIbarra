@@ -8,7 +8,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TicTac frame = new TicTac();
+					Numbers frame = new Numbers();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

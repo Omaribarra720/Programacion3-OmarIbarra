@@ -31,6 +31,7 @@ public class Registro extends JFrame {
     private JTextField textField_4;
     private JTextField textField_5;
     private JFrame frame;
+    private JTextField textField_3;
 
     /**
      * Launch the application.
@@ -64,6 +65,12 @@ public class Registro extends JFrame {
         this.login(frame);
         //this.registro(frame);
         //this.recuperacion(frame);
+        //this.alta(frame);
+        //this.baja(frame);
+        //this.consultar(frame);
+        //this.olvidarCont(frame);
+        //this.accederSistema(frame);
+        //this.crearUsuario(frame);
         
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -110,18 +117,66 @@ public class Registro extends JFrame {
         JMenuItem altaItem = new JMenuItem("Alta");
 		JMenuItem bajaItem = new JMenuItem("Baja");
 		JMenuItem consultarItem = new JMenuItem("Consultar");
+		altaItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		alta(frame);
+		       
+		    }
+		});
+		bajaItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		baja(frame);
+		       
+		    }
+		});
+		consultarItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		consultar(frame);
+		       
+		    }
+		});
 		mnUsuarios.add(altaItem);
 		mnUsuarios.add(bajaItem);
 		mnUsuarios.add(consultarItem);
         
         JMenu mnAyuda = new JMenu("Ayuda");
         menuBar.add(mnAyuda);
-        JMenuItem ayuda1Item = new JMenuItem("¿Cómo crear un usuario?");
-		JMenuItem ayuda2Item = new JMenuItem("¿Cómo acceder al sistema?");
-		JMenuItem ayuda3Item = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
-		mnAyuda.add(ayuda1Item);
-		mnAyuda.add(ayuda2Item);
-		mnAyuda.add(ayuda3Item);
+        JMenuItem ayudaUsuarioItem = new JMenuItem("¿Cómo crear un usuario?");
+		JMenuItem ayudaAccederItem = new JMenuItem("¿Cómo acceder al sistema?");
+		JMenuItem ayudaContItem = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
+		ayudaUsuarioItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		crearUsuario(frame);
+		       
+		    }
+		});
+		ayudaAccederItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		accederSistema(frame);
+		       
+		    }
+		});
+		ayudaContItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		olvidarCont(frame);
+		       
+		    }
+		});
+		mnAyuda.add(ayudaUsuarioItem);
+		mnAyuda.add(ayudaAccederItem);
+		mnAyuda.add(ayudaContItem);
          	
     }
     private void login(JFrame Frame) {
@@ -191,9 +246,6 @@ public class Registro extends JFrame {
         		Frame.remove(contentPane);
         		Frame.removeAll();
         		registro(Frame);
-        		
-        		
-        		 
         		//Frame.repaint();
         		//Frame.invalidate();
         		//Frame.revalidate();
@@ -346,16 +398,47 @@ public class Registro extends JFrame {
         	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setBounds(100, 100, 450, 610);
             contentPane = new JPanel();
-            contentPane.setBackground(new Color(0, 0, 255));
+            contentPane.setBackground(new Color(128, 128, 192));
             contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
             setContentPane(contentPane);
             contentPane.setLayout(null);
             
-            JLabel lblNewLabel_1 = new JLabel("Recuperación de cuenta");
+            JLabel lblNewLabel_1 = new JLabel("Recuperar cuenta");
             lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 22));
             lblNewLabel_1.setForeground(new Color(255, 255, 255));
-            lblNewLabel_1.setBounds(80, 86, 296, 27);
+            lblNewLabel_1.setBounds(113, 67, 224, 27);
             contentPane.add(lblNewLabel_1);
+            
+            JButton btnNewButton_2 = new JButton("Regresar al login");
+            btnNewButton_2.setBackground(new Color(255, 128, 255));
+            btnNewButton_2.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		Frame.remove(contentPane);
+            		Frame.removeAll();
+            		login(Frame);
+            		
+            		            		 
+            		
+            	}
+            });
+            btnNewButton_2.setBounds(93, 398, 244, 23);
+            contentPane.add(btnNewButton_2);
+            
+            JLabel lblNewLabel_2 = new JLabel("Correo electrónico");
+            lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
+            lblNewLabel_2.setForeground(new Color(255, 255, 255));
+            lblNewLabel_2.setBounds(93, 179, 144, 14);
+            contentPane.add(lblNewLabel_2);
+            
+            JButton btnNewButton_2_1 = new JButton("Restablecer");
+            btnNewButton_2_1.setBackground(new Color(255, 128, 192));
+            btnNewButton_2_1.setBounds(93, 324, 244, 23);
+            contentPane.add(btnNewButton_2_1);
+            
+            textField_3 = new JTextField();
+            textField_3.setBounds(93, 193, 244, 27);
+            contentPane.add(textField_3);
+            textField_3.setColumns(10);
             
            
             
@@ -367,5 +450,125 @@ public class Registro extends JFrame {
         	
         	
         	
+        }
+        private void alta(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 255));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblNewLabel_3 = new JLabel("Dar de alta");
+            lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblNewLabel_3.setBounds(162, 62, 167, 14);
+            contentPane.add(lblNewLabel_3);
+            
+            
+            contentPane.repaint();
+            contentPane.revalidate();
+                    	
+        }
+        private void baja(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 255));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblbaja = new JLabel("Dar de baja");
+            lblbaja.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblbaja.setBounds(154, 62, 167, 14);
+            contentPane.add(lblbaja);
+            
+                  
+            contentPane.repaint();
+            contentPane.revalidate();
+                  	
+        }
+        private void consultar(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 255));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblconsultar = new JLabel("Consultar");
+            lblconsultar.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblconsultar.setBounds(171, 62, 167, 14);
+            contentPane.add(lblconsultar);
+            
+                  
+            contentPane.repaint();
+            contentPane.revalidate();
+                  	
+        }
+        private void crearUsuario(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 128));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblcrear = new JLabel("¿Cómo crear un usuario?");
+            lblcrear.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblcrear.setBounds(120, 64, 267, 14);
+            contentPane.add(lblcrear);
+            
+                  
+            contentPane.repaint();
+            contentPane.revalidate();
+                  	
+        }
+        private void accederSistema(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 128));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblcrear = new JLabel("¿Cómo acceder al sistema?");
+            lblcrear.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblcrear.setBounds(110, 63, 256, 14);
+            contentPane.add(lblcrear);
+            
+                  
+            contentPane.repaint();
+            contentPane.revalidate();
+                  	
+        }
+        private void olvidarCont(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 128));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblolvidar = new JLabel("¿Cué pasa si olvidé mi contraseña?");
+            lblolvidar.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblolvidar.setBounds(70, 60, 310, 32);
+            contentPane.add(lblolvidar);
+            
+                  
+            contentPane.repaint();
+            contentPane.revalidate();
+                  	
         }
     }

@@ -1,6 +1,6 @@
 
 import java.awt.EventQueue;
-import javax.swing.Timer;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
+import java.util.Timer;
 
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -30,8 +30,7 @@ public class Numbers extends JFrame implements ActionListener{
 	private String[] arregloNumeros;
 	private JLabel lblTiempo;
 	private Timer timer;
-	private int tiempo;
-	private boolean pausado;
+	private int segundosTranscurridos;
 
 	/**
 	 * Launch the application.
@@ -79,7 +78,7 @@ public class Numbers extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 486, 554);
 		contentPane = new JPanel();
-		
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -95,7 +94,21 @@ public class Numbers extends JFrame implements ActionListener{
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				movimiento(btn1);
-				
+				/*
+				if(btn2.getText().equals("")) {
+					String aux=arregloRevuelto[0];
+					arregloRevuelto[0]=arregloRevuelto[1];
+					arregloRevuelto[1]=aux;
+
+				}
+				if(btn5.getText().equals("")) {
+					String aux=arregloRevuelto[0];
+					arregloRevuelto[0]=arregloRevuelto[4];
+					arregloRevuelto[4]=aux;
+				}
+				getContentPane().repaint();
+				getContentPane().revalidate();
+				 */
 			}
 		});
 		btn1.setBounds(10, 11, 104, 99);
@@ -283,7 +296,6 @@ public class Numbers extends JFrame implements ActionListener{
 				btn1.setEnabled(false);
 				for (int i = 0; i < botones.length; i++) {
 					botones[i].setEnabled(false);
-					pausado=true;
 				}
 				
 			}
@@ -295,7 +307,6 @@ public class Numbers extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < botones.length; i++) {
 					botones[i].setEnabled(true);
-					pausado=false;
 				}
 			}
 		});
@@ -308,18 +319,38 @@ public class Numbers extends JFrame implements ActionListener{
 		lblTiempo.setBounds(10, 26, 100, 26);
 		panel_1.add(lblTiempo);
 
-        
 
-        //tiempo
-        tiempo = 0;
-        timer = new Timer(1000, this);
-        timer.start();
-        pausado=false;
-        
+
+
+		// Crear el JLabel para mostrar el tiempo transcurrido
+
+		
+		// Inicializar el temporizador
+		/*
+		segundosTranscurridos = 0;
+		timer = new Timer(1000, this);
+		*/
+		
+	
+		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
 	}
 	public void movimiento(JButton btnClick) {
-		
-		
+
+
+
 		//Que boton se tomo
 		int indice = 0;
 		for (int i = 0; i < botones.length; i++) {
@@ -335,73 +366,72 @@ public class Numbers extends JFrame implements ActionListener{
 
 		//Buscar el vacio
 		JButton btnCambio = null;
-		//los de ariba
-		if (fila > 0 && botones[indice - 4].getText().equals("")) { 
+		if (fila > 0 && botones[indice - 4].getText().equals("")) { // Arriba
 			btnCambio = botones[indice - 4];
 			String aux = btnClick.getText();
 			btnClick.setText(btnCambio.getText());
 			btnCambio.setText(aux);
-		//abajo
-		} else if (fila < 3 && botones[indice + 4].getText().equals("")) { 
+		} else if (fila < 3 && botones[indice + 4].getText().equals("")) { // Abajo
 			btnCambio = botones[indice + 4];
 			String aux = btnClick.getText();
 			btnClick.setText(btnCambio.getText());
 			btnCambio.setText(aux);
-		//der
-		} else if (columna > 0 && botones[indice - 1].getText().equals("")) { 
+		} else if (columna > 0 && botones[indice - 1].getText().equals("")) { // Izquierda
 			btnCambio = botones[indice - 1];
 			String aux = btnClick.getText();
 			btnClick.setText(btnCambio.getText());
 			btnCambio.setText(aux);
-			//izq
-		} else if (columna < 3 && botones[indice + 1].getText().equals("")) {
+		} else if (columna < 3 && botones[indice + 1].getText().equals("")) { // Derecha
 			btnCambio = botones[indice + 1];
 			String aux = btnClick.getText();
 			btnClick.setText(btnCambio.getText());
 			btnCambio.setText(aux);
 		}
-		//si se gano
-		 ganador();
 
 
 
 	}
 	public void ganador() {
-			if(btn1.getText().equals("1")&&btn2.getText().equals("2")&&btn3.getText().equals("3")&&btn4.getText().equals("4")&&btn5.getText().equals("5")&&
-					btn6.getText().equals("6")&&btn7.getText().equals("7")&&btn8.getText().equals("8")&&btn9.getText().equals("9")&&
-					btn10.getText().equals("10")&&btn11.getText().equals("11")&&btn12.getText().equals("12")&&btn13.getText().equals("13")&&btn14.getText().equals("14")&&
-					btn15.getText().equals("15")&&btn16.getText().equals("")) {
-				
-				JOptionPane.showMessageDialog(null, "Ganaste", "Inane warning",JOptionPane.ERROR_MESSAGE);
-			}
+		if(btn1.getText().equals("1")&&btn2.getText().equals("2")&&btn3.getText().equals("3")&&btn4.getText().equals("4")&&btn5.getText().equals("5")&&
+				btn6.getText().equals("6")&&btn7.getText().equals("7")&&btn1.getText().equals("8")&&btn1.getText().equals("8")&&btn9.getText().equals("9")&&
+				btn10.getText().equals("10")&&btn11.getText().equals("11")&&btn12.getText().equals("12")&&btn13.getText().equals("13")&&btn14.getText().equals("14")&&
+				btn15.getText().equals("15")&&btn16.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Ganaste", "Inane warning",JOptionPane.ERROR_MESSAGE);
+
+
+
+		}
+
 	}
 	private void reiniciar() {
-		
+		//Arreglo de strings
 
 
-		//Revolver 
+		// Revolver los números
 		List<String> lista = Arrays.asList(arregloNumeros);
 		Collections.shuffle(lista);
 		String[] arregloRevuelto = lista.toArray(new String[0]);
 
-		//dar los numeros
+		// Asignar los números a los botones
 		for (int i = 0; i < botones.length; i++) {
 			botones[i].setText(arregloRevuelto[i]);
 		}
-		tiempo=0;
+
+
 
 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 if (!pausado) {
-	            tiempo++;
-	            int horas = tiempo / 3600;
-	            int minutos = (tiempo % 3600) / 60;
-	            int segundos = tiempo % 60;
-	            	lblTiempo.setText(String.format("%02d:%02d:%02d", horas, minutos, segundos));
-	        };
+		// Incrementar los segundos transcurridos
+		segundosTranscurridos++;
 
-		
+		// Calcular horas, minutos y segundos
+		int horas = segundosTranscurridos / 3600;
+		int minutos = (segundosTranscurridos % 3600) / 60;
+		int segundos = segundosTranscurridos % 60;
+
+		// Actualizar el texto del JLabel
+		lblTiempo.setText(String.format("%02d:%02d:%02d", horas, minutos, segundos));
 	}
 }

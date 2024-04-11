@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.Timer;
 import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.imageio.ImageIO;
@@ -76,11 +77,12 @@ public class Ventana extends JFrame implements MouseListener,KeyListener {
 	}
 
 	public void IniciarComponentes() {
-		this.admin();
+		//this.admin();
 		//this.login();
 		//this.registro();
 		//this.calculadoraGrid();
 		//this.botones();
+		this.TicTac();
 
 		//this.panelLayout();
 		//this.paint(getGraphics());
@@ -229,6 +231,8 @@ public class Ventana extends JFrame implements MouseListener,KeyListener {
 	 */
 	public void panelLayout() {
 
+		Timer timer = new Timer();
+		
 		this.setSize(480, 650);
 		JPanel panel = new JPanel();
 		panel.setSize(this.getWidth(), 500);
@@ -319,6 +323,33 @@ public class Ventana extends JFrame implements MouseListener,KeyListener {
 
 
 
+	}
+
+	public void TicTac() {
+		
+		this.setSize(480, 650);
+
+		JPanel panel = new JPanel();
+		panel.setSize(this.getWidth(), this.getHeight());
+		panel.setBackground(Color.decode("#E16D8D"));
+		panel.setLayout(new GridLayout(3,3));
+		this.setVisible(true);
+
+		   
+        
+        for(int i = 0;i<9;i++) {
+        	JButton button = new JButton();
+        	panel.add(button);
+        	
+        }
+        
+        
+        
+        this.add(panel);
+        
+		
+		
+		
 	}
 	public void calculadoraGrid(){
 

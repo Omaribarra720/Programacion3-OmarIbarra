@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 
 public class Tablero implements KeyListener {
+	public int x=10,y=10;
 
     JFrame frame;
    
@@ -55,7 +56,9 @@ public class Tablero implements KeyListener {
                 Graphics2D g2d = (Graphics2D) g;
 
         	    g2d.setColor(Color.blue);
-        	    g2d.fillRect(220, 50, 100, 70);
+        	    g2d.fillRect(x, y, 20, 20);
+        	    
+        	    
         	    
                 
         	    
@@ -84,7 +87,38 @@ public class Tablero implements KeyListener {
    
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("Código de la tecla presionada fue: " + e.getKeyCode());
+        //System.out.println("Código de la tecla presionada fue: " + e.getKeyCode());
+        
+        switch(e.getKeyCode()) {
+        //arriba
+        case 87:
+        	y-=10;
+        	break;
+        //abajo
+        case 83:
+        	y+=10;
+        	break;
+        	
+        
+        //derecha
+        case 68 :
+        	x+=10;
+        	break;
+        
+        //izquierda
+        case 65:
+        	x-=10;
+        	break;
+        default:
+        	break;
+        
+               
+        
+        }
+        //frame.update(getGraphics());
+        frame.repaint();
+        frame.revalidate();
+       
     }
     
     @Override

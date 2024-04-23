@@ -14,6 +14,21 @@ public class Jugador {
 			this.color = color;
 			
 		}
+		public boolean colision(Jugador jugador) {
+		    boolean colision = false;
+		    
+		    // colision, lo hice menos extenso
+		    if ( jugador.getX() + jugador.getWidht() >this.getX() &&
+		    	 jugador.getX() <this.getX() + this.getWidht()  &&
+		         jugador.getY() + jugador.getHeight() >this.getY() &&
+		         jugador.getY()<this.getY() + this.getHeight() )
+		    {
+		       
+		        colision = true;
+		    }
+		    	
+		    return colision;
+		}
 
 
 		public String getColor() {

@@ -233,7 +233,6 @@ public class Tablero implements KeyListener {
 		btnReinicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tiempo=0;
-				dir=0;
 				jugador.setX(30);
 				jugador.setY(30);
 				timer.start();
@@ -340,10 +339,8 @@ public class Tablero implements KeyListener {
                 int segundos = tiempo % 60;
 
                
-                if (jugador.getX() + jugador.getWidht() > meta.getX() &&
-                        jugador.getX() < meta.getX() + meta.getWidht() &&
-                        jugador.getY() + jugador.getHeight() > meta.getY() &&
-                        jugador.getY() < meta.getY() + meta.getHeight()) {
+                if (jugador.getX() > meta.getX() ) 
+                        {
                 	tiempoMeta.stop();
                 	timer.stop();
                 	

@@ -13,6 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import java.io.File;
 import java.awt.Color;
 
 public class Tablero implements KeyListener {
@@ -232,11 +235,19 @@ public class Tablero implements KeyListener {
 		JButton btnReinicio = new JButton("Reiniciar");
 		btnReinicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/*
 				tiempo=0;
 				jugador.setX(30);
 				jugador.setY(30);
 				timer.start();
 				iniciarTemporizador();
+				*/
+				
+				
+				
+				
+				
+				
 			}
 		});
 		btnReinicio.setBounds(266, 11, 89, 23);

@@ -3,6 +3,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
@@ -15,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
@@ -155,10 +160,41 @@ public class Registro extends JFrame {
         lblIngreseSuContrasea.setBounds(98, 197, 242, 14);
         contentPane.add(lblIngreseSuContrasea);
         
-        JButton btnNewButton = new JButton("Acceder");
+        JButton btnNewButton = new JButton("Acceder(\"Archivo json \")");
         btnNewButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		JOptionPane.showMessageDialog(null, "Registro terminado", "Atención", JOptionPane.INFORMATION_MESSAGE);
+        		
+        		String nombre=  textField_4.getText();
+        		char[] contraseña = password.getPassword();
+
+        	
+        		String contrasenia = new String(contraseña);
+        		
+				Jason json = new Jason( nombre, contrasenia);
+				ObjectMapper mapper = new ObjectMapper();
+				mapper.enable(SerializationFeature.INDENT_OUTPUT);
+				
+							
+				try {
+					
+					mapper.writeValue(new File("Usuario.json"), json);
+								
+					String contenidoJson = mapper.writeValueAsString(json);
+			        System.out.println("Contenido del archivo JSON:");
+			        System.out.println(contenidoJson);
+					
+					//System.out.println("Nombre: "+json.getNombre());
+					//System.out.println("Apellido: "+json.getApellido());
+					
+					
+									
+				}catch(Exception e2){
+					
+					
+				}
+				
+        		
         		
         		//JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",JOptionPane.ERROR_MESSAGE);
         		
@@ -166,7 +202,7 @@ public class Registro extends JFrame {
         		
         	}
         });
-        btnNewButton.setBounds(149, 278, 139, 40);
+        btnNewButton.setBounds(98, 276, 242, 40);
         contentPane.add(btnNewButton);
         
         textField_4 = new JTextField();
@@ -174,10 +210,10 @@ public class Registro extends JFrame {
         contentPane.add(textField_4);
         textField_4.setColumns(10);
         
-        textField_5 = new JTextField();
-        textField_5.setColumns(10);
-        textField_5.setBounds(98, 211, 242, 31);
-        contentPane.add(textField_5);
+        password = new JPasswordField();
+        password.setColumns(10);
+        password.setBounds(98, 211, 242, 31);
+        contentPane.add(password);
         
         JLabel lblNewLabel_1_1 = new JLabel("¿Olvidó su contraseña?");
         lblNewLabel_1_1.setForeground(new Color(255, 255, 255));

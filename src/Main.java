@@ -6,7 +6,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		//Ventana ventana= new Ventana();
 		
-		
+		/*
 		EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -17,8 +17,8 @@ public class Main {
                 }
             }
         });
+		*/
 		
-		/*
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -29,7 +29,7 @@ public class Main {
 				}
 			}
 		});
-		*/
+		
 
 	}
 

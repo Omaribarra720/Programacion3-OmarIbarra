@@ -3,10 +3,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
-
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
+import java.io.File;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
@@ -19,7 +18,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
@@ -29,13 +27,12 @@ public class Registro extends JFrame {
     private JPanel contentPane;
     private JTextField textField;
     private JTextField textField_2;
-    private JTextField textField_1;
+    private JTextField textField_1,fieldNombre;
 
    
-    private JPasswordField password,password2;
-    private JTextField textField_4;
-    private JTextField textField_5;
+    private JPasswordField password,password2,fieldContraseña;
     private JFrame frame;
+    private JTextField textField_3;
 
     /**
      * Launch the application.
@@ -67,8 +64,15 @@ public class Registro extends JFrame {
         JPanel panel = new JPanel();
         frame.getContentPane().add(panel);
         this.login(frame);
+        //this.inicio(frame);
         //this.registro(frame);
         //this.recuperacion(frame);
+        //this.alta(frame);
+        //this.baja(frame);
+        //this.consultar(frame);
+        //this.olvidarCont(frame);
+        //this.accederSistema(frame);
+        //this.crearUsuario(frame);
         
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -115,19 +119,92 @@ public class Registro extends JFrame {
         JMenuItem altaItem = new JMenuItem("Alta");
 		JMenuItem bajaItem = new JMenuItem("Baja");
 		JMenuItem consultarItem = new JMenuItem("Consultar");
+		altaItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		alta(frame);
+		       
+		    }
+		});
+		bajaItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		baja(frame);
+		       
+		    }
+		});
+		consultarItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		consultar(frame);
+		       
+		    }
+		});
 		mnUsuarios.add(altaItem);
 		mnUsuarios.add(bajaItem);
 		mnUsuarios.add(consultarItem);
         
         JMenu mnAyuda = new JMenu("Ayuda");
         menuBar.add(mnAyuda);
-        JMenuItem ayuda1Item = new JMenuItem("¿Cómo crear un usuario?");
-		JMenuItem ayuda2Item = new JMenuItem("¿Cómo acceder al sistema?");
-		JMenuItem ayuda3Item = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
-		mnAyuda.add(ayuda1Item);
-		mnAyuda.add(ayuda2Item);
-		mnAyuda.add(ayuda3Item);
+        JMenuItem ayudaUsuarioItem = new JMenuItem("¿Cómo crear un usuario?");
+		JMenuItem ayudaAccederItem = new JMenuItem("¿Cómo acceder al sistema?");
+		JMenuItem ayudaContItem = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
+		ayudaUsuarioItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		crearUsuario(frame);
+		       
+		    }
+		});
+		ayudaAccederItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		accederSistema(frame);
+		       
+		    }
+		});
+		ayudaContItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	frame.remove(contentPane);
+        		frame.removeAll();
+        		olvidarCont(frame);
+		       
+		    }
+		});
+		mnAyuda.add(ayudaUsuarioItem);
+		mnAyuda.add(ayudaAccederItem);
+		mnAyuda.add(ayudaContItem);
          	
+    }
+    
+    private void inicio(JFrame Frame) {
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 610);
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(128, 128, 128));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        JLabel lblNewLabel = new JLabel("Inicio");
+        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblNewLabel.setForeground(new Color(255, 255, 255));
+        lblNewLabel.setBounds(189, 57, 82, 40);
+        contentPane.add(lblNewLabel);
+             
+       
+        contentPane.repaint();
+        contentPane.revalidate();
+        
+    	  	
+    	
+    	
+    	
     }
     private void login(JFrame Frame) {
     	    	
@@ -160,14 +237,97 @@ public class Registro extends JFrame {
         lblIngreseSuContrasea.setBounds(98, 197, 242, 14);
         contentPane.add(lblIngreseSuContrasea);
         
-        JButton btnNewButton = new JButton("Acceder(\"Archivo json \")");
+        
+        
+        JButton btnNewButton = new JButton("Acceder");
         btnNewButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
+        		
+        		ObjectMapper objectMapper = new ObjectMapper(); 
+                JsonNode jsonNode;
+                
+				try {
+					
+					jsonNode = objectMapper.readTree(new File("src/Archivos/Usuario.json"));
+					String nombre = jsonNode.get("nombre").asText(); 
+	                String contraseña = jsonNode.get("contraseña").asText(); 
+	                            
+        		    String nombreIngresado = fieldNombre.getText();
+        		    char[] contraseñaIngresada = fieldContraseña.getPassword();
+        		    String contraseñaIngresadaString = new String(contraseñaIngresada);
+        		    
+        		    
+        		    if (nombreIngresado.equals(nombre) && contraseñaIngresadaString.equals(contraseña)) {
+        		      
+        		        JOptionPane.showMessageDialog(null, "Bienvenido", "", JOptionPane.INFORMATION_MESSAGE);
+        		        frame.remove(contentPane);
+                		frame.removeAll();
+                		inicio(frame);
+        		        
+        		    } else {
+        		       
+        		        JOptionPane.showMessageDialog(null, "Hubo un error en los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        		    }
+	                               
+	               
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					 System.out.println("Error al leer el archivo JSON");
+				} 
+                
+        		
+        		
+        		
+        		
+				
+				
+				//Leer un archivo pero utilizando una clase donde se crea el objeto
+        		/*
+        		ObjectMapper mapper = new ObjectMapper();
+        		try {
+        		    
+        		    
+        		    
+        		    File file = new File("src/Archivos/Usuario.json");
+        		    
+        		   
+        		    Jason usuario = mapper.readValue(file, Jason.class);
+        		    
+        		  
+        		    String nombreGuardado = usuario.getNombre();
+        		    String contraseñaGuardada = usuario.getContraseña();
+        		    
+        		    
+        		    String nombreIngresado = fieldNombre.getText();
+        		    char[] contraseñaIngresada = fieldPassword.getPassword();
+        		    String contraseñaIngresadaString = new String(contraseñaIngresada);
+        		    
+        		  
+        		    if (nombreIngresado.equals(nombreGuardado) && contraseñaIngresadaString.equals(contraseñaGuardada)) {
+        		       
+        		        JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Atención", JOptionPane.INFORMATION_MESSAGE);
+        		    } else {
+        		     
+        		        JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+        		    }
+        		} catch (IOException e2) {
+        		    e2.printStackTrace();
+        		    System.out.println("Error al leer el archivo JSON");
+        		}
+        		
+        		*/
+        						
+				
+				
+        		/*
+        		// Crear archivos json con clase
         		JOptionPane.showMessageDialog(null, "Registro terminado", "Atención", JOptionPane.INFORMATION_MESSAGE);
         		
-        		String nombre=  textField_4.getText();
-        		char[] contraseña = password.getPassword();
-
+        		String nombre=  fieldNombre.getText();
+        		char[] contraseña = fieldPassword.getPassword();
         	
         		String contrasenia = new String(contraseña);
         		
@@ -193,8 +353,8 @@ public class Registro extends JFrame {
 					
 					
 				}
+				*/
 				
-        		
         		
         		//JOptionPane.showMessageDialog(null, r + "," + g + "," + b, "Inane warning",JOptionPane.ERROR_MESSAGE);
         		
@@ -202,18 +362,18 @@ public class Registro extends JFrame {
         		
         	}
         });
-        btnNewButton.setBounds(98, 276, 242, 40);
+        btnNewButton.setBounds(150, 277, 139, 40);
         contentPane.add(btnNewButton);
         
-        textField_4 = new JTextField();
-        textField_4.setBounds(98, 128, 242, 31);
-        contentPane.add(textField_4);
-        textField_4.setColumns(10);
+        fieldNombre = new JTextField();
+        fieldNombre.setBounds(98, 128, 242, 31);
+        contentPane.add(fieldNombre);
+        fieldNombre.setColumns(10);
         
-        password = new JPasswordField();
-        password.setColumns(10);
-        password.setBounds(98, 211, 242, 31);
-        contentPane.add(password);
+        fieldContraseña = new JPasswordField();
+        fieldContraseña.setColumns(10);
+        fieldContraseña.setBounds(98, 211, 242, 31);
+        contentPane.add(fieldContraseña);
         
         JLabel lblNewLabel_1_1 = new JLabel("¿Olvidó su contraseña?");
         lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
@@ -227,9 +387,6 @@ public class Registro extends JFrame {
         		Frame.remove(contentPane);
         		Frame.removeAll();
         		registro(Frame);
-        		
-        		
-        		 
         		//Frame.repaint();
         		//Frame.invalidate();
         		//Frame.revalidate();
@@ -382,16 +539,47 @@ public class Registro extends JFrame {
         	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setBounds(100, 100, 450, 610);
             contentPane = new JPanel();
-            contentPane.setBackground(new Color(0, 0, 255));
+            contentPane.setBackground(new Color(128, 128, 192));
             contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
             setContentPane(contentPane);
             contentPane.setLayout(null);
             
-            JLabel lblNewLabel_1 = new JLabel("Recuperación de cuenta");
+            JLabel lblNewLabel_1 = new JLabel("Recuperar cuenta");
             lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 22));
             lblNewLabel_1.setForeground(new Color(255, 255, 255));
-            lblNewLabel_1.setBounds(80, 86, 296, 27);
+            lblNewLabel_1.setBounds(113, 67, 224, 27);
             contentPane.add(lblNewLabel_1);
+            
+            JButton btnNewButton_2 = new JButton("Regresar al login");
+            btnNewButton_2.setBackground(new Color(255, 128, 255));
+            btnNewButton_2.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		Frame.remove(contentPane);
+            		Frame.removeAll();
+            		login(Frame);
+            		
+            		            		 
+            		
+            	}
+            });
+            btnNewButton_2.setBounds(93, 398, 244, 23);
+            contentPane.add(btnNewButton_2);
+            
+            JLabel lblNewLabel_2 = new JLabel("Correo electrónico");
+            lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
+            lblNewLabel_2.setForeground(new Color(255, 255, 255));
+            lblNewLabel_2.setBounds(93, 179, 144, 14);
+            contentPane.add(lblNewLabel_2);
+            
+            JButton btnNewButton_2_1 = new JButton("Restablecer");
+            btnNewButton_2_1.setBackground(new Color(255, 128, 192));
+            btnNewButton_2_1.setBounds(93, 324, 244, 23);
+            contentPane.add(btnNewButton_2_1);
+            
+            textField_3 = new JTextField();
+            textField_3.setBounds(93, 193, 244, 27);
+            contentPane.add(textField_3);
+            textField_3.setColumns(10);
             
            
             
@@ -403,5 +591,125 @@ public class Registro extends JFrame {
         	
         	
         	
+        }
+        private void alta(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 255));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblNewLabel_3 = new JLabel("Dar de alta");
+            lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblNewLabel_3.setBounds(162, 62, 167, 14);
+            contentPane.add(lblNewLabel_3);
+            
+            
+            contentPane.repaint();
+            contentPane.revalidate();
+                    	
+        }
+        private void baja(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 255));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblbaja = new JLabel("Dar de baja");
+            lblbaja.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblbaja.setBounds(154, 62, 167, 14);
+            contentPane.add(lblbaja);
+            
+                  
+            contentPane.repaint();
+            contentPane.revalidate();
+                  	
+        }
+        private void consultar(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 255));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblconsultar = new JLabel("Consultar");
+            lblconsultar.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblconsultar.setBounds(171, 62, 167, 14);
+            contentPane.add(lblconsultar);
+            
+                  
+            contentPane.repaint();
+            contentPane.revalidate();
+                  	
+        }
+        private void crearUsuario(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 128));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblcrear = new JLabel("¿Cómo crear un usuario?");
+            lblcrear.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblcrear.setBounds(120, 64, 267, 14);
+            contentPane.add(lblcrear);
+            
+                  
+            contentPane.repaint();
+            contentPane.revalidate();
+                  	
+        }
+        private void accederSistema(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 128));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblcrear = new JLabel("¿Cómo acceder al sistema?");
+            lblcrear.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblcrear.setBounds(110, 63, 256, 14);
+            contentPane.add(lblcrear);
+            
+                  
+            contentPane.repaint();
+            contentPane.revalidate();
+                  	
+        }
+        private void olvidarCont(JFrame Frame) {
+	    	
+        	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(100, 100, 450, 610);
+            contentPane = new JPanel();
+            contentPane.setBackground(new Color(128, 255, 128));
+            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+            setContentPane(contentPane);
+            contentPane.setLayout(null);
+            
+            JLabel lblolvidar = new JLabel("¿Cué pasa si olvidé mi contraseña?");
+            lblolvidar.setFont(new Font("Tahoma", Font.BOLD, 16));
+            lblolvidar.setBounds(70, 60, 310, 32);
+            contentPane.add(lblolvidar);
+            
+                  
+            contentPane.repaint();
+            contentPane.revalidate();
+                  	
         }
     }

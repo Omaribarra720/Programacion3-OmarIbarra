@@ -3,11 +3,7 @@ public class Jason {
 	
 	private String nombre,contraseña;
 
-	public Jason(String nombre, String contraseña) {
-		this.contraseña = contraseña;
-		this.nombre= nombre;
-		
-		
+	public Jason() {
 	}
 
 	public String getNombre() {

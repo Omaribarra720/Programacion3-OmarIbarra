@@ -11,7 +11,7 @@ public class AuthController {
 	public AuthController() {
 		frame = new JFrame();
 		frame.setVisible(false);
-		frame.setBounds(100, 100, 800, 810);
+		frame.setBounds(100, 100, 600, 810);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new GridLayout(0,1,0,2));
 		view= new AuthView();
